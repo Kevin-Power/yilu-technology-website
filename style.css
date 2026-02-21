@@ -1405,6 +1405,338 @@ ul {
     transform: translateY(0) translateX(0) scale(1);
 }
 
+/* === Hero Grid Pattern === */
+.hero-grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+
+/* === Security Card Slogan === */
+.security-card-slogan {
+    display: block;
+    font-size: 11px;
+    color: var(--gray-400);
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+/* === Security Card Stats === */
+.security-card-stats {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: rgba(14, 165, 233, 0.05);
+    border-radius: 10px;
+}
+
+.security-stat {
+    text-align: center;
+    flex: 1;
+}
+
+.security-stat strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary-light);
+    margin-bottom: 2px;
+}
+
+.security-stat span {
+    font-size: 11px;
+    color: var(--gray-400);
+}
+
+.security-card-desc strong {
+    color: var(--primary-light);
+}
+
+/* === Dell Product Showcase (new structure) === */
+.dell-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.dell-product-section {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 40px;
+    border: 1px solid var(--gray-200);
+}
+
+.dell-product-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.dell-product-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--dark-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-light);
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.dell-product-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark-900);
+    margin-bottom: 2px;
+}
+
+.dell-product-subtitle {
+    font-size: 14px;
+    color: var(--dark-500);
+    margin: 0;
+}
+
+.dell-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.dell-card {
+    background: var(--gray-50);
+    border-radius: var(--border-radius);
+    padding: 28px;
+    border: 1px solid var(--gray-200);
+    transition: var(--transition);
+    position: relative;
+}
+
+.dell-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.dell-card-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    letter-spacing: 0.5px;
+}
+
+.dell-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark-900);
+    margin-bottom: 10px;
+}
+
+.dell-card p {
+    font-size: 13px;
+    color: var(--dark-600);
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.dell-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.dell-tags span {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: var(--white);
+    color: var(--dark-600);
+    border-radius: 20px;
+    font-weight: 500;
+    border: 1px solid var(--gray-200);
+}
+
+/* === Why Us Section === */
+.why-us {
+    background: var(--dark-900);
+    position: relative;
+    overflow: hidden;
+}
+
+.why-us::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 30% 0%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 100%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
+}
+
+.why-us .section-tag { color: var(--primary-light); }
+.why-us .section-title { color: var(--white); }
+.why-us .section-desc { color: var(--gray-400); }
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.why-card {
+    background: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--border-radius);
+    padding: 36px 28px;
+    transition: var(--transition);
+}
+
+.why-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(14, 165, 233, 0.3);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.why-number {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 900;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+}
+
+.why-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.why-card p {
+    font-size: 14px;
+    color: var(--gray-400);
+    line-height: 1.7;
+}
+
+/* === Partners Banner (new style) === */
+.partners {
+    background: var(--gray-50);
+    padding: 60px 0;
+}
+
+.partners-banner {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 48px;
+    border: 1px solid var(--gray-200);
+    text-align: center;
+}
+
+.partners-banner h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark-900);
+    margin-bottom: 32px;
+}
+
+.partners-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+}
+
+.partner-logo-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark-700);
+    padding: 16px 24px;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.partner-logo-item:hover {
+    background: var(--gray-50);
+    color: var(--primary);
+}
+
+.partner-logo-item i {
+    font-size: 24px;
+    color: var(--primary);
+}
+
+/* === CTA Actions (updated) === */
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.cta-content p br {
+    display: block;
+}
+
+/* === Contact Quick Links === */
+.contact-quick-links {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--gray-200);
+}
+
+.contact-quick-links h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dark-900);
+    margin-bottom: 12px;
+}
+
+.quick-link-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.quick-link-tags a {
+    font-size: 12px;
+    padding: 6px 14px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 20px;
+    color: var(--dark-600);
+    transition: var(--transition);
+}
+
+.quick-link-tags a:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
 /* === Particle Dot === */
 .particle {
     position: absolute;
@@ -1427,12 +1759,16 @@ ul {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .dell-grid {
+    .dell-product-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .security-grid {
         grid-template-columns: 1fr;
+    }
+
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .approach-steps {
@@ -1517,16 +1853,25 @@ ul {
         grid-template-columns: 1fr;
     }
 
-    .dell-grid {
+    .dell-product-grid {
         grid-template-columns: 1fr;
     }
 
-    .dell-card {
-        flex-direction: column;
+    .dell-product-section {
+        padding: 24px;
     }
 
-    .partners-showcase {
-        grid-template-columns: repeat(2, 1fr);
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .partners-logos {
+        gap: 24px;
+    }
+
+    .partner-logo-item {
+        font-size: 15px;
+        padding: 12px 16px;
     }
 
     .contact-grid {
@@ -1548,8 +1893,19 @@ ul {
         text-align: center;
     }
 
-    .hero-desc br {
+    .hero-desc br,
+    .cta-content p br {
         display: none;
+    }
+
+    .cta-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .security-card-stats {
+        flex-direction: column;
+        gap: 12px;
     }
 }
 
@@ -1567,8 +1923,8 @@ ul {
         justify-content: center;
     }
 
-    .partners-showcase {
-        grid-template-columns: 1fr;
+    .partners-logos {
+        flex-direction: column;
     }
 
     .footer-grid {
