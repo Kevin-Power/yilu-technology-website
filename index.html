@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="宜路科技 YILU Technology - 專業系統整合商，提供 Dell 全系列產品與 CrowdStrike、KnowBe4、SSC 資安解決方案">
+    <meta name="keywords" content="宜路科技, YILU Technology, Dell, CrowdStrike, KnowBe4, SSC, 系統整合, 資安服務, 伺服器, 網路設備">
+    <title>宜路科技 YILU Technology | 專業系統整合 & 資安服務</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡</text></svg>">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <span class="loader-text">YILU</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="8" fill="url(#logoGrad)"/>
+                        <path d="M12 14L20 10L28 14V22L20 30L12 22V14Z" stroke="white" stroke-width="2" fill="none"/>
+                        <path d="M20 10V30M12 14L28 22M28 14L12 22" stroke="white" stroke-width="1.5" opacity="0.6"/>
+                        <circle cx="20" cy="20" r="3" fill="white"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#0ea5e9"/>
+                                <stop offset="100%" stop-color="#6366f1"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">宜路科技</span>
+                    <span class="logo-sub">YILU TECHNOLOGY</span>
+                </div>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">首頁</a></li>
+                <li><a href="#about" class="nav-link">關於我們</a></li>
+                <li><a href="#services" class="nav-link">服務項目</a></li>
+                <li><a href="#dell" class="nav-link">Dell 產品</a></li>
+                <li><a href="#security" class="nav-link">資安服務</a></li>
+                <li><a href="#partners" class="nav-link">合作夥伴</a></li>
+                <li><a href="#contact" class="nav-link">聯絡我們</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">免費諮詢</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-particles" id="heroParticles"></div>
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge" data-aos="fade-down">
+                <i class="fas fa-shield-halved"></i>
+                <span>值得信賴的專業系統整合商</span>
+            </div>
+            <h1 class="hero-title" data-aos="fade-up">
+                <span class="hero-title-line">為企業打造</span>
+                <span class="hero-title-gradient">堅不可摧的</span>
+                <span class="hero-title-line">IT 基礎架構</span>
+            </h1>
+            <p class="hero-desc" data-aos="fade-up" data-aos-delay="200">
+                宜路科技結合 Dell Technologies 全方位產品線與頂尖資安解決方案，<br>
+                為您的企業提供從基礎建設到資安防護的一站式專業服務。
+            </p>
+            <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
+                <a href="#contact" class="btn btn-primary">
+                    <span>立即諮詢</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#services" class="btn btn-outline">
+                    <span>了解服務</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="600">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="200">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">企業客戶</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="99.9">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">服務滿意度</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="24">0</span><span class="stat-suffix">/7</span>
+                    <span class="stat-label">技術支援</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="10">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">年專業經驗</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#about">
+                <div class="mouse">
+                    <div class="mouse-wheel"></div>
+                </div>
+                <span>向下捲動</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">About Us</span>
+                <h2 class="section-title">關於宜路科技</h2>
+                <p class="section-desc">專業、可靠、值得信賴的 IT 夥伴</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-content" data-aos="fade-right">
+                    <h3>您的企業 IT 最佳夥伴</h3>
+                    <p>
+                        <strong>宜路科技有限公司 (YILU Technology Co., LTD)</strong> 成立於台北，是一家專注於企業 IT 基礎架構建設與資訊安全的專業系統整合商。我們深耕資訊科技領域，致力於為企業客戶提供最完善的解決方案。
+                    </p>
+                    <p>
+                        身為 Dell Technologies 授權合作夥伴，我們能提供涵蓋伺服器、儲存設備、網路交換器、工作站到商用筆電的全方位產品線。同時，我們攜手全球頂尖資安品牌 CrowdStrike、KnowBe4 與 SSC，為企業建構多層次的資安防護體系。
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                            <div>
+                                <h4>原廠認證</h4>
+                                <p>Dell Technologies 授權合作夥伴</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-icon"><i class="fas fa-users-gear"></i></div>
+                            <div>
+                                <h4>專業團隊</h4>
+                                <p>擁有多張國際認證的技術工程師</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                            <div>
+                                <h4>即時支援</h4>
+                                <p>快速回應的售後技術服務</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual" data-aos="fade-left">
+                    <div class="about-card-stack">
+                        <div class="about-card card-1">
+                            <i class="fas fa-server"></i>
+                            <span>系統整合</span>
+                        </div>
+                        <div class="about-card card-2">
+                            <i class="fas fa-shield-halved"></i>
+                            <span>資安防護</span>
+                        </div>
+                        <div class="about-card card-3">
+                            <i class="fas fa-cloud"></i>
+                            <span>雲端服務</span>
+                        </div>
+                        <div class="about-card card-4">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>技術諮詢</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Our Services</span>
+                <h2 class="section-title">專業服務項目</h2>
+                <p class="section-desc">從硬體建設到資安防護，一站式滿足企業所有 IT 需求</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="fas fa-server"></i></div>
+                    </div>
+                    <h3>IT 基礎架構建設</h3>
+                    <p>規劃、建置及維護企業級 IT 基礎設施，涵蓋伺服器、儲存、網路及虛擬化等完整解決方案。</p>
+                    <ul class="service-list">
+                        <li>伺服器規劃與部署</li>
+                        <li>企業儲存方案設計</li>
+                        <li>網路架構規劃</li>
+                        <li>虛擬化環境建置</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="fas fa-shield-halved"></i></div>
+                    </div>
+                    <h3>企業資安防護</h3>
+                    <p>整合全球頂尖資安品牌，打造多層次防禦體系，全面保護企業數位資產與營運安全。</p>
+                    <ul class="service-list">
+                        <li>端點偵測與回應 (EDR)</li>
+                        <li>資安意識培訓</li>
+                        <li>弱點掃描與管理</li>
+                        <li>資安事件應變</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                    </div>
+                    <h3>IT 顧問諮詢</h3>
+                    <p>提供專業的 IT 策略規劃與技術顧問服務，協助企業制定最佳化的數位轉型方案。</p>
+                    <ul class="service-list">
+                        <li>IT 架構評估</li>
+                        <li>資安合規諮詢</li>
+                        <li>採購規劃建議</li>
+                        <li>數位轉型策略</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="fas fa-wrench"></i></div>
+                    </div>
+                    <h3>維運與技術支援</h3>
+                    <p>專業的技術團隊提供全方位維運服務，確保企業系統穩定運行，維持最佳營運效率。</p>
+                    <ul class="service-list">
+                        <li>系統監控與維護</li>
+                        <li>故障排除與修復</li>
+                        <li>軟硬體升級服務</li>
+                        <li>定期健檢與報告</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dell Products Section -->
+    <section class="section dell" id="dell">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Dell Technologies</span>
+                <h2 class="section-title">Dell 全系列產品</h2>
+                <p class="section-desc">身為 Dell Technologies 授權合作夥伴，我們提供完整的企業級產品線</p>
+            </div>
+            <div class="dell-grid">
+                <div class="dell-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="dell-card-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="dell-card-content">
+                        <h3>PowerEdge 伺服器</h3>
+                        <p>高效能企業級伺服器，從塔式、機架式到刀鋒伺服器，滿足各種運算需求。</p>
+                        <div class="dell-tags">
+                            <span>塔式伺服器</span>
+                            <span>機架式伺服器</span>
+                            <span>模組化基礎架構</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dell-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="dell-card-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="dell-card-content">
+                        <h3>PowerStore / PowerVault 儲存</h3>
+                        <p>智慧型儲存解決方案，提供卓越的效能與彈性，確保企業數據安全與可用性。</p>
+                        <div class="dell-tags">
+                            <span>全快閃儲存</span>
+                            <span>混合式儲存</span>
+                            <span>備份解決方案</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dell-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="dell-card-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="dell-card-content">
+                        <h3>網路交換器</h3>
+                        <p>企業級網路交換器，提供高速、穩定、安全的網路連線環境。</p>
+                        <div class="dell-tags">
+                            <span>資料中心交換器</span>
+                            <span>校園網路交換器</span>
+                            <span>邊際交換器</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dell-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="dell-card-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="dell-card-content">
+                        <h3>Precision 工作站</h3>
+                        <p>專為創意專業人士及工程師打造的高效能工作站，支援最嚴苛的運算需求。</p>
+                        <div class="dell-tags">
+                            <span>塔式工作站</span>
+                            <span>行動工作站</span>
+                            <span>機架式工作站</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dell-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="dell-card-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="dell-card-content">
+                        <h3>Latitude / Vostro 商用筆電</h3>
+                        <p>輕薄強效的商用筆電系列，兼顧行動力與企業安全管理需求。</p>
+                        <div class="dell-tags">
+                            <span>Latitude 系列</span>
+                            <span>Vostro 系列</span>
+                            <span>Rugged 強固型</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dell-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="dell-card-icon">
+                        <i class="fas fa-display"></i>
+                    </div>
+                    <div class="dell-card-content">
+                        <h3>OptiPlex 桌上型電腦 & 顯示器</h3>
+                        <p>空間優化的商用桌機與專業顯示器，打造高效辦公環境。</p>
+                        <div class="dell-tags">
+                            <span>OptiPlex 桌機</span>
+                            <span>UltraSharp 顯示器</span>
+                            <span>周邊配件</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section class="section security" id="security">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Cybersecurity</span>
+                <h2 class="section-title">頂尖資安解決方案</h2>
+                <p class="section-desc">攜手全球領先資安品牌，為企業建構最堅實的數位防線</p>
+            </div>
+            <div class="security-grid">
+                <!-- CrowdStrike -->
+                <div class="security-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="security-card-header">
+                        <div class="security-brand">
+                            <div class="security-brand-icon crowdstrike">
+                                <i class="fas fa-crosshairs"></i>
+                            </div>
+                            <h3>CrowdStrike</h3>
+                        </div>
+                        <span class="security-badge">EDR / XDR</span>
+                    </div>
+                    <p class="security-card-desc">
+                        全球領先的雲原生端點防護平台，透過 AI 驅動的 Falcon 平台，提供即時威脅偵測、自動化回應與深度可視性。
+                    </p>
+                    <div class="security-features">
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Falcon Prevent 新世代防毒</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Falcon Insight 端點偵測與回應</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Falcon OverWatch 24/7 威脅獵捕</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>雲端工作負載防護</span>
+                        </div>
+                    </div>
+                    <div class="security-card-footer">
+                        <a href="#contact" class="btn btn-sm">了解更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- KnowBe4 -->
+                <div class="security-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="security-card-header">
+                        <div class="security-brand">
+                            <div class="security-brand-icon knowbe4">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h3>KnowBe4</h3>
+                        </div>
+                        <span class="security-badge">資安意識</span>
+                    </div>
+                    <p class="security-card-desc">
+                        全球最大的資安意識培訓與模擬釣魚攻擊平台，透過持續性培訓強化員工的資安防禦意識。
+                    </p>
+                    <div class="security-features">
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>模擬網路釣魚測試</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>互動式資安培訓課程</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>合規管理與報告</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>風險評估與分析</span>
+                        </div>
+                    </div>
+                    <div class="security-card-footer">
+                        <a href="#contact" class="btn btn-sm">了解更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- SSC -->
+                <div class="security-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="security-card-header">
+                        <div class="security-brand">
+                            <div class="security-brand-icon ssc">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h3>SSC</h3>
+                        </div>
+                        <span class="security-badge">弱點管理</span>
+                    </div>
+                    <p class="security-card-desc">
+                        專業的資安弱點掃描與管理解決方案，協助企業識別、評估並修復系統漏洞，降低資安風險。
+                    </p>
+                    <div class="security-features">
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>弱點掃描與評估</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>風險優先排序</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>合規性檢測</span>
+                        </div>
+                        <div class="security-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>持續監控與報告</span>
+                        </div>
+                    </div>
+                    <div class="security-card-footer">
+                        <a href="#contact" class="btn btn-sm">了解更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Approach -->
+            <div class="security-approach" data-aos="fade-up">
+                <div class="approach-header">
+                    <h3>我們的資安防護策略</h3>
+                    <p>多層次、全方位的防禦架構</p>
+                </div>
+                <div class="approach-steps">
+                    <div class="approach-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h4>評估與規劃</h4>
+                            <p>深入了解企業現況，進行全面風險評估，制定量身打造的資安策略。</p>
+                        </div>
+                    </div>
+                    <div class="approach-connector"></div>
+                    <div class="approach-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h4>部署與實施</h4>
+                            <p>專業工程團隊執行解決方案部署，確保系統穩定上線與最佳效能。</p>
+                        </div>
+                    </div>
+                    <div class="approach-connector"></div>
+                    <div class="approach-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h4>監控與回應</h4>
+                            <p>持續監控威脅態勢，即時偵測異常行為，快速應變處理資安事件。</p>
+                        </div>
+                    </div>
+                    <div class="approach-connector"></div>
+                    <div class="approach-step">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h4>優化與進化</h4>
+                            <p>定期檢視防護效果，持續優化安全策略，因應最新威脅趨勢調整。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="section partners" id="partners">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Partners</span>
+                <h2 class="section-title">合作夥伴</h2>
+                <p class="section-desc">攜手國際頂尖品牌，為企業提供最優質的產品與服務</p>
+            </div>
+            <div class="partners-showcase" data-aos="fade-up">
+                <div class="partner-item">
+                    <div class="partner-logo-wrap">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <span class="partner-name">Dell Technologies</span>
+                    <span class="partner-type">基礎架構</span>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-logo-wrap">
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <span class="partner-name">CrowdStrike</span>
+                    <span class="partner-type">端點防護</span>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-logo-wrap">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <span class="partner-name">KnowBe4</span>
+                    <span class="partner-type">資安意識</span>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-logo-wrap">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <span class="partner-name">SSC</span>
+                    <span class="partner-type">弱點管理</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="cta-bg">
+            <div class="cta-particles"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2>準備好強化您的企業 IT 了嗎？</h2>
+                <p>讓宜路科技的專業團隊為您量身打造最佳解決方案</p>
+                <div class="cta-actions">
+                    <a href="#contact" class="btn btn-primary btn-lg">
+                        <i class="fas fa-phone"></i>
+                        <span>立即聯繫我們</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Contact Us</span>
+                <h2 class="section-title">聯絡我們</h2>
+                <p class="section-desc">歡迎與我們聯繫，了解更多專業解決方案</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-info-card">
+                        <h3>宜路科技有限公司</h3>
+                        <p class="contact-eng-name">YILU Technology Co., LTD</p>
+                        <div class="contact-details">
+                            <div class="contact-detail">
+                                <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+                                <div>
+                                    <strong>公司地址</strong>
+                                    <p>臺北市中山區農安街4號4樓</p>
+                                </div>
+                            </div>
+                            <div class="contact-detail">
+                                <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                                <div>
+                                    <strong>聯絡電話</strong>
+                                    <p>(02) 2585-0055</p>
+                                </div>
+                            </div>
+                            <div class="contact-detail">
+                                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                                <div>
+                                    <strong>電子信箱</strong>
+                                    <p>info@yilutech.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-detail">
+                                <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                                <div>
+                                    <strong>營業時間</strong>
+                                    <p>週一至週五 09:00 - 18:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrap" data-aos="fade-left">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">姓名 *</label>
+                                <input type="text" id="name" name="name" required placeholder="請輸入您的姓名">
+                            </div>
+                            <div class="form-group">
+                                <label for="company">公司名稱</label>
+                                <input type="text" id="company" name="company" placeholder="請輸入公司名稱">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">電子信箱 *</label>
+                                <input type="email" id="email" name="email" required placeholder="請輸入電子信箱">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">聯絡電話</label>
+                                <input type="tel" id="phone" name="phone" placeholder="請輸入聯絡電話">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">需求類型</label>
+                            <select id="service" name="service">
+                                <option value="">請選擇需求類型</option>
+                                <option value="dell">Dell 產品諮詢</option>
+                                <option value="security">資安服務諮詢</option>
+                                <option value="infrastructure">IT 基礎架構</option>
+                                <option value="consulting">IT 顧問諮詢</option>
+                                <option value="support">技術支援</option>
+                                <option value="other">其他需求</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">需求說明 *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="請描述您的需求，我們將盡快回覆"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>送出諮詢</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="8" fill="url(#footerLogoGrad)"/>
+                            <path d="M12 14L20 10L28 14V22L20 30L12 22V14Z" stroke="white" stroke-width="2" fill="none"/>
+                            <path d="M20 10V30M12 14L28 22M28 14L12 22" stroke="white" stroke-width="1.5" opacity="0.6"/>
+                            <circle cx="20" cy="20" r="3" fill="white"/>
+                            <defs>
+                                <linearGradient id="footerLogoGrad" x1="0" y1="0" x2="40" y2="40">
+                                    <stop offset="0%" stop-color="#0ea5e9"/>
+                                    <stop offset="100%" stop-color="#6366f1"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>宜路科技</span>
+                    </div>
+                    <p>專業可靠的系統整合商，為企業打造堅不可摧的 IT 基礎架構與資安防線。</p>
+                </div>
+                <div class="footer-links">
+                    <h4>快速連結</h4>
+                    <ul>
+                        <li><a href="#about">關於我們</a></li>
+                        <li><a href="#services">服務項目</a></li>
+                        <li><a href="#dell">Dell 產品</a></li>
+                        <li><a href="#security">資安服務</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>資安品牌</h4>
+                    <ul>
+                        <li><a href="#security">CrowdStrike</a></li>
+                        <li><a href="#security">KnowBe4</a></li>
+                        <li><a href="#security">SSC</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>聯絡資訊</h4>
+                    <ul>
+                        <li><i class="fas fa-location-dot"></i> 臺北市中山區農安街4號4樓</li>
+                        <li><i class="fas fa-phone"></i> (02) 2585-0055</li>
+                        <li><i class="fas fa-envelope"></i> info@yilutech.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 宜路科技有限公司 YILU Technology Co., LTD. All rights reserved.</p>
+                <p>統一編號：90898596</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
