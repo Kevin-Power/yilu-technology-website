@@ -58,6 +58,9 @@
                 <li><a href="#why-us" class="nav-link">為何選擇我們</a></li>
                 <li><a href="#contact" class="nav-link">聯絡我們</a></li>
             </ul>
+            <button class="nav-search-btn" id="navSearchBtn" aria-label="搜尋服務">
+                <i class="fas fa-magnifying-glass"></i>
+            </button>
             <a href="#contact" class="nav-cta">免費諮詢</a>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -828,6 +831,38 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-chevron-up"></i>
     </button>
+
+    <!-- Search Modal -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-modal">
+            <div class="search-modal-header">
+                <div class="search-input-wrap">
+                    <i class="fas fa-magnifying-glass search-input-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="搜尋服務，例如：伺服器、資安、AI..." autocomplete="off">
+                    <kbd class="search-kbd">ESC</kbd>
+                </div>
+                <button class="search-close" id="searchClose" aria-label="關閉搜尋">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+            <div class="search-body">
+                <div class="search-suggestions" id="searchSuggestions">
+                    <p class="search-section-label">熱門搜尋</p>
+                    <div class="search-tags">
+                        <button class="search-tag" data-query="伺服器">伺服器</button>
+                        <button class="search-tag" data-query="資安防護">資安防護</button>
+                        <button class="search-tag" data-query="AI">AI 智能</button>
+                        <button class="search-tag" data-query="架設網站">架設網站</button>
+                        <button class="search-tag" data-query="系統優化">系統優化</button>
+                        <button class="search-tag" data-query="防駭">防駭系統</button>
+                        <button class="search-tag" data-query="雲端">雲端架構</button>
+                        <button class="search-tag" data-query="儲存">企業儲存</button>
+                    </div>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
