@@ -519,6 +519,91 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // === Scroll Progress Bar ===
+    const scrollProgressBar = document.getElementById('scrollProgress');
+    if (scrollProgressBar) {
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgressBar.style.width = scrollPercent + '%';
+        }, { passive: true });
+    }
+
+    // === FAQ Accordion ===
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (question) {
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                // Close all
+                faqItems.forEach(i => i.classList.remove('active'));
+                // Toggle current
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        }
+    });
+
+    // === Hero Typing Effect ===
+    const heroTitleGradient = document.querySelector('.hero-title-gradient');
+    if (heroTitleGradient) {
+        const phrases = ['堅不可摧的', '安全可靠的', '高效智能的', '值得信賴的'];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 150;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+
+            if (isDeleting) {
+                heroTitleGradient.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 80;
+            } else {
+                heroTitleGradient.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 150;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typingSpeed = 2500; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typingSpeed = 400; // Pause before next word
+            }
+
+            setTimeout(typeEffect, typingSpeed);
+        }
+
+        // Start typing after initial animation
+        setTimeout(typeEffect, 3000);
+    }
+
+    // === Navbar Hide/Show on Scroll ===
+    let lastScrollY = 0;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > 600 && currentScrollY > lastScrollY + 5) {
+                    navbar.style.transform = 'translateY(-100%)';
+                } else {
+                    navbar.style.transform = 'translateY(0)';
+                }
+                lastScrollY = currentScrollY;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
     // === Initialize ===
     handleScroll();
 });

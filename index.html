@@ -68,6 +68,9 @@
         </div>
     </nav>
 
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-bg">
@@ -632,11 +635,152 @@
         </div>
     </section>
 
+    <!-- Industries Section -->
+    <section class="section industries" id="industries">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Industries</span>
+                <h2 class="section-title">產業應用場景</h2>
+                <p class="section-desc">跨產業的專業經驗，為不同領域打造量身定制的 IT 解決方案</p>
+            </div>
+            <div class="industries-grid">
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="industry-icon"><i class="fas fa-landmark"></i></div>
+                    <h3>金融與保險</h3>
+                    <p>符合金管會資安規範，部署端點防護與資安意識培訓，保護客戶資料與交易安全。</p>
+                    <div class="industry-solutions">
+                        <span>CrowdStrike EDR</span>
+                        <span>KnowBe4 培訓</span>
+                        <span>合規諮詢</span>
+                    </div>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="industry-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>科技與製造</h3>
+                    <p>建置高效能運算環境與 AI 伺服器，保護智慧財產權，確保生產線不中斷運作。</p>
+                    <div class="industry-solutions">
+                        <span>PowerEdge AI 伺服器</span>
+                        <span>PowerStore 儲存</span>
+                        <span>供應鏈防護</span>
+                    </div>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="industry-icon"><i class="fas fa-hospital"></i></div>
+                    <h3>醫療與生技</h3>
+                    <p>保護病患隱私資料 (PHI)，建置符合醫療資安標準的 IT 基礎架構與資料備份方案。</p>
+                    <div class="industry-solutions">
+                        <span>PowerProtect 備份</span>
+                        <span>資安合規</span>
+                        <span>端點防護</span>
+                    </div>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="industry-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>教育與研究</h3>
+                    <p>為校園與研究機構提供高效能運算叢集、大規模儲存與網路安全防護方案。</p>
+                    <div class="industry-solutions">
+                        <span>HPC 叢集</span>
+                        <span>PowerScale 儲存</span>
+                        <span>校園網路</span>
+                    </div>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="industry-icon"><i class="fas fa-building-columns"></i></div>
+                    <h3>政府與公部門</h3>
+                    <p>符合政府資安等級分類，提供通過認證的安全解決方案與在地化技術支援。</p>
+                    <div class="industry-solutions">
+                        <span>資安等級合規</span>
+                        <span>SecurityScorecard</span>
+                        <span>在地支援</span>
+                    </div>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="industry-icon"><i class="fas fa-cart-shopping"></i></div>
+                    <h3>零售與電商</h3>
+                    <p>保護線上交易與客戶資料，建置高可用性的電商基礎架構與 DDoS 防護。</p>
+                    <div class="industry-solutions">
+                        <span>高可用架構</span>
+                        <span>資料保護</span>
+                        <span>威脅偵測</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq" id="faq">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-title">常見問題</h2>
+                <p class="section-desc">關於我們的服務，您可能想了解的問題</p>
+            </div>
+            <div class="faq-list" data-aos="fade-up">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>宜路科技提供哪些品牌的產品？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>我們是 Dell Technologies 授權合作夥伴，提供 Dell 全系列企業級產品，包含 PowerEdge 伺服器、PowerStore/PowerScale/PowerProtect/PowerVault 儲存、Precision 工作站、Latitude 商用筆電、OptiPlex 桌機、網路交換器及 UltraSharp 顯示器。資安方面，我們代理 CrowdStrike、KnowBe4 與 SecurityScorecard 三大國際品牌。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>我的企業規模不大，也適合使用這些資安解決方案嗎？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>當然適合。CrowdStrike、KnowBe4 與 SecurityScorecard 都提供彈性的授權方案，可依企業規模與預算靈活調整。我們會根據您的實際需求，推薦最適合且最具成本效益的方案組合，而非一味推銷高階產品。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>從諮詢到完成部署大約需要多長時間？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>視專案規模而定。單純的產品採購通常 1-2 週即可到貨部署；中型的資安解決方案導入約 2-4 週；大型的 IT 基礎架構整體規劃與建置則需 1-3 個月。我們會在初步評估後提供明確的時程規劃。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>你們提供哪些售後服務與技術支援？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>我們提供完善的售後服務體系：包含系統監控與告警管理、故障排除與緊急修復、韌體更新與軟硬體升級、定期健檢報告與效能優化建議。同時，Dell 原廠保固與各資安品牌的技術支援管道也由我們協助對接，確保問題快速解決。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>CrowdStrike 與傳統防毒軟體有什麼不同？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>傳統防毒依賴病毒碼比對，只能防範已知威脅。CrowdStrike Falcon 是雲原生、AI 驅動的端點防護平台，透過行為分析即時偵測未知威脅與零日攻擊。單一輕量級 Agent 即可提供 NGAV 防毒、EDR 偵測回應、威脅獵捕等功能，在 MITRE ATT&CK 評估中實現 100% 偵測覆蓋率。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>如何開始與宜路科技合作？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>非常簡單！您可以透過本頁的聯絡表單、撥打電話 (02) 2585-0055、或寄送 Email 至 info@yilutech.com 聯繫我們。我們會安排專業顧問與您進行初步需求訪談（免費），了解您的現況與目標後，提供量身打造的解決方案建議書。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Partners Section -->
     <section class="section partners" id="partners">
         <div class="container">
             <div class="partners-banner" data-aos="fade-up">
-                <h3>我們的合作夥伴</h3>
+                <h3>策略合作夥伴</h3>
+                <p class="partners-subtitle">攜手全球領先品牌，為台灣企業提供世界級的 IT 解決方案</p>
                 <div class="partners-logos">
                     <div class="partner-logo-item">
                         <i class="fas fa-building"></i>
