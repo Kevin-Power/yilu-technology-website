@@ -3,17 +3,21 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // === Preloader ===
+    // === Preloader with Staggered Content Reveal ===
     const preloader = document.getElementById('preloader');
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            preloader.classList.add('hidden');
-        }, 800);
-    });
-    // Fallback: hide preloader after 3s regardless
-    setTimeout(() => {
+    function hidePreloader() {
         preloader.classList.add('hidden');
-    }, 3000);
+        // Trigger staggered content reveal after preloader hides
+        setTimeout(() => {
+            document.body.classList.add('page-loaded');
+        }, 200);
+    }
+    window.addEventListener('load', () => {
+        // Wait for SVG draw animation to complete, then hide
+        setTimeout(hidePreloader, 1800);
+    });
+    // Fallback: hide preloader after 3.5s regardless
+    setTimeout(hidePreloader, 3500);
 
     // === Navbar Scroll Effect ===
     const navbar = document.getElementById('navbar');
@@ -791,6 +795,215 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }, { passive: true });
+    }
+
+    // === Cursor Glow Follower (Desktop Only) ===
+    const cursorGlow = document.getElementById('cursorGlow');
+    if (cursorGlow && window.matchMedia('(pointer: fine)').matches && window.innerWidth >= 1024) {
+        // Track which dark sections enable glow
+        const darkSections = document.querySelectorAll('.hero, .security, .why-us, .testimonials, .cta-section');
+        let glowActive = false;
+        let glowRaf = null;
+        let mouseX = 0, mouseY = 0;
+
+        function updateGlow() {
+            cursorGlow.style.left = mouseX + 'px';
+            cursorGlow.style.top = mouseY + 'px';
+            glowRaf = null;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (!glowRaf) {
+                glowRaf = requestAnimationFrame(updateGlow);
+            }
+
+            // Check if cursor is over a dark section
+            let overDark = false;
+            for (const sec of darkSections) {
+                const rect = sec.getBoundingClientRect();
+                if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                    overDark = true;
+                    break;
+                }
+            }
+            if (overDark && !glowActive) {
+                cursorGlow.classList.add('visible');
+                glowActive = true;
+            } else if (!overDark && glowActive) {
+                cursorGlow.classList.remove('visible');
+                glowActive = false;
+            }
+        }, { passive: true });
+    }
+
+    // === Magnetic Hover Effect on CTA Buttons ===
+    if (window.matchMedia('(pointer: fine)').matches) {
+        const magneticBtns = document.querySelectorAll('.btn-primary, .nav-cta');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const strength = 0.2;
+                this.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                setTimeout(() => {
+                    this.style.transition = '';
+                }, 400);
+            });
+        });
+    }
+
+    // === Card Spotlight / Gradient Follow Effect (Stripe-style) ===
+    if (window.matchMedia('(pointer: fine)').matches) {
+        const spotlightCards = document.querySelectorAll('.service-card, .why-card, .industry-card, .dell-card');
+        spotlightCards.forEach(card => {
+            // Create spotlight element
+            const spotlight = document.createElement('div');
+            spotlight.className = 'card-spotlight';
+            card.style.position = 'relative';
+            card.style.overflow = 'hidden';
+            card.appendChild(spotlight);
+
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                spotlight.style.background = `radial-gradient(350px circle at ${x}px ${y}px, rgba(14, 165, 233, 0.06), transparent 60%)`;
+            });
+        });
+    }
+
+    // === Animated Security Approach Timeline on Scroll ===
+    const approachSteps = document.querySelectorAll('.approach-step');
+    const approachConnectors = document.querySelectorAll('.approach-connector');
+    const approachProgressLine = document.getElementById('approachProgress');
+
+    if (approachSteps.length > 0) {
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Stagger the steps
+                    approachSteps.forEach((step, i) => {
+                        setTimeout(() => {
+                            step.classList.add('timeline-animate');
+                        }, i * 300);
+                    });
+
+                    // Stagger the connectors
+                    approachConnectors.forEach((conn, i) => {
+                        setTimeout(() => {
+                            conn.classList.add('timeline-animate');
+                        }, (i + 1) * 300 + 150);
+                    });
+
+                    // Animate progress line
+                    if (approachProgressLine) {
+                        setTimeout(() => {
+                            approachProgressLine.classList.add('timeline-animate');
+                        }, 200);
+                    }
+
+                    timelineObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const approachSection = document.querySelector('.security-approach');
+        if (approachSection) {
+            timelineObserver.observe(approachSection);
+        }
+    }
+
+    // === Section Title Text Reveal Animation (clip-path wipe) ===
+    const sectionHeaders = document.querySelectorAll('.section-header');
+    sectionHeaders.forEach(header => {
+        const tag = header.querySelector('.section-tag');
+        const title = header.querySelector('.section-title');
+        const desc = header.querySelector('.section-desc');
+
+        if (tag) tag.classList.add('section-tag-reveal');
+        if (title) {
+            // Wrap title text in a span for clip-path animation
+            const titleText = title.innerHTML;
+            title.innerHTML = `<span class="section-title-reveal">${titleText}</span>`;
+        }
+        if (desc) desc.classList.add('section-desc-reveal');
+    });
+
+    const titleRevealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const tag = entry.target.querySelector('.section-tag-reveal');
+                const titleSpan = entry.target.querySelector('.section-title-reveal');
+                const desc = entry.target.querySelector('.section-desc-reveal');
+
+                if (tag) {
+                    setTimeout(() => tag.classList.add('revealed'), 100);
+                }
+                if (titleSpan) {
+                    setTimeout(() => titleSpan.classList.add('revealed'), 250);
+                }
+                if (desc) {
+                    setTimeout(() => desc.classList.add('revealed'), 500);
+                }
+
+                titleRevealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    sectionHeaders.forEach(header => {
+        titleRevealObserver.observe(header);
+    });
+
+    // === Navbar Sliding Pill Active Indicator ===
+    const navPill = document.getElementById('navPill');
+    if (navPill && window.innerWidth >= 769) {
+        function updateNavPill() {
+            const activeLink = document.querySelector('.nav-link.active');
+            if (activeLink) {
+                const linkRect = activeLink.getBoundingClientRect();
+                const menuRect = navPill.parentElement.getBoundingClientRect();
+                const left = linkRect.left - menuRect.left;
+                const width = linkRect.width;
+                navPill.style.left = left + 'px';
+                navPill.style.width = width + 'px';
+                navPill.classList.add('visible');
+            }
+        }
+
+        // Update pill on scroll (active link changes)
+        const pillScrollHandler = () => {
+            requestAnimationFrame(updateNavPill);
+        };
+        window.addEventListener('scroll', pillScrollHandler, { passive: true });
+
+        // Update pill on nav link hover
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                const linkRect = this.getBoundingClientRect();
+                const menuRect = navPill.parentElement.getBoundingClientRect();
+                navPill.style.left = (linkRect.left - menuRect.left) + 'px';
+                navPill.style.width = linkRect.width + 'px';
+                navPill.classList.add('visible');
+            });
+        });
+
+        const navMenuEl = document.getElementById('navMenu');
+        if (navMenuEl) {
+            navMenuEl.addEventListener('mouseleave', updateNavPill);
+        }
+
+        // Initial position
+        setTimeout(updateNavPill, 500);
+        window.addEventListener('resize', updateNavPill);
     }
 
     // === Initialize ===

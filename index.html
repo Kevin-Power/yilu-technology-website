@@ -33,11 +33,30 @@
     <!-- Skip to main content (Accessibility) -->
     <a href="#main-content" class="skip-to-content">跳至主要內容</a>
 
+    <!-- Cursor Glow (desktop only) -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <!-- Preloader -->
     <div id="preloader" role="status" aria-label="載入中">
         <div class="loader">
-            <div class="loader-ring"></div>
-            <span class="loader-text">YILU</span>
+            <svg class="loader-logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background rect with draw-in -->
+                <rect class="loader-rect" x="10" y="10" width="100" height="100" rx="24" stroke="url(#preloaderGrad)" stroke-width="2" fill="none"/>
+                <!-- Hexagonal shape -->
+                <path class="loader-hex" d="M36 42L60 30L84 42V66L60 84L36 66V42Z" stroke="white" stroke-width="2.5" fill="none"/>
+                <!-- Cross lines -->
+                <path class="loader-lines" d="M60 30V84M36 42L84 66M84 42L36 66" stroke="white" stroke-width="1.5" opacity="0.5" fill="none"/>
+                <!-- Center dot -->
+                <circle class="loader-dot" cx="60" cy="57" r="5" fill="white" opacity="0"/>
+                <defs>
+                    <linearGradient id="preloaderGrad" x1="10" y1="10" x2="110" y2="110">
+                        <stop offset="0%" stop-color="#0ea5e9"/>
+                        <stop offset="100%" stop-color="#6366f1"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="loader-text">YILU TECHNOLOGY</span>
+            <div class="loader-bar"><div class="loader-bar-fill"></div></div>
         </div>
     </div>
 
@@ -72,6 +91,7 @@
                 <li><a href="#security" class="nav-link">資安服務</a></li>
                 <li><a href="#why-us" class="nav-link">為何選擇我們</a></li>
                 <li><a href="#contact" class="nav-link">聯絡我們</a></li>
+                <div class="nav-pill" id="navPill"></div>
             </ul>
             <button class="nav-search-btn" id="navSearchBtn" aria-label="搜尋服務">
                 <i class="fas fa-magnifying-glass"></i>
@@ -226,6 +246,19 @@
                 </div>
                 <div class="about-visual" data-aos="fade-left">
                     <div class="about-network">
+                        <!-- Connection lines SVG -->
+                        <svg class="network-lines" viewBox="0 0 400 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <line class="net-line" x1="200" y1="85" x2="200" y2="180" stroke="url(#netLineGrad)" stroke-width="1.5" stroke-dasharray="6 4"/>
+                            <line class="net-line" x1="315" y1="225" x2="236" y2="225" stroke="url(#netLineGrad)" stroke-width="1.5" stroke-dasharray="6 4"/>
+                            <line class="net-line" x1="200" y1="270" x2="200" y2="365" stroke="url(#netLineGrad)" stroke-width="1.5" stroke-dasharray="6 4"/>
+                            <line class="net-line" x1="85" y1="225" x2="164" y2="225" stroke="url(#netLineGrad)" stroke-width="1.5" stroke-dasharray="6 4"/>
+                            <defs>
+                                <linearGradient id="netLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.6"/>
+                                    <stop offset="100%" stop-color="#6366f1" stop-opacity="0.3"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
                         <!-- Central hub -->
                         <div class="network-hub">
                             <div class="network-hub-inner">
@@ -502,6 +535,8 @@
             <div class="security-grid">
                 <!-- CrowdStrike -->
                 <div class="security-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="security-card-border-glow"></div>
+                    <div class="security-card-inner-bg"></div>
                     <div class="security-card-header">
                         <div class="security-brand">
                             <div class="security-brand-icon crowdstrike">
@@ -542,6 +577,8 @@
 
                 <!-- KnowBe4 -->
                 <div class="security-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="security-card-border-glow"></div>
+                    <div class="security-card-inner-bg"></div>
                     <div class="security-card-header">
                         <div class="security-brand">
                             <div class="security-brand-icon knowbe4">
@@ -582,6 +619,8 @@
 
                 <!-- SecurityScorecard -->
                 <div class="security-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="security-card-border-glow"></div>
+                    <div class="security-card-inner-bg"></div>
                     <div class="security-card-header">
                         <div class="security-brand">
                             <div class="security-brand-icon ssc">
@@ -628,6 +667,7 @@
                     <p>四階段打造企業全方位資安防禦體系</p>
                 </div>
                 <div class="approach-steps">
+                    <div class="approach-progress-line" id="approachProgress"><div class="approach-progress-fill"></div></div>
                     <div class="approach-step">
                         <div class="step-number">01</div>
                         <div class="step-content">
@@ -1000,6 +1040,19 @@
                                 <div><strong>營業時間</strong><p>週一至週五 09:00 - 18:00</p></div>
                             </div>
                         </div>
+                        <!-- Google Maps -->
+                        <div class="contact-map">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.5!2d121.5267!3d25.0636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a95a1e0c0001%3A0x0!2z6Ie65YyX5biC5Lit5bGx5Y2A6L6y5a6J6KGXNOiZnzTmqJM!5e0!3m2!1szh-TW!2stw!4v1700000000000!5m2!1szh-TW!2stw" 
+                                width="100%" 
+                                height="200" 
+                                style="border:0; border-radius: 10px;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="宜路科技辦公室位置">
+                            </iframe>
+                        </div>
                         <div class="contact-quick-links">
                             <h4>快速諮詢</h4>
                             <div class="quick-link-tags">
@@ -1065,6 +1118,13 @@
     </section>
 
     </main>
+
+    <!-- Section Divider: Contact to Footer -->
+    <div class="section-divider divider-light-to-dark">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,60 C360,0 720,0 1080,30 C1260,45 1380,55 1440,60 L1440,60 L0,60 Z" fill="#0f172a"/>
+        </svg>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">

@@ -112,6 +112,46 @@ textarea:focus-visible {
         opacity: 1 !important;
         transform: none !important;
     }
+
+    .cursor-glow {
+        display: none !important;
+    }
+
+    .approach-step {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .approach-connector {
+        opacity: 0.4 !important;
+    }
+
+    .section-title-reveal {
+        clip-path: none !important;
+    }
+
+    .section-tag-reveal,
+    .section-desc-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .loader-rect,
+    .loader-hex,
+    .loader-lines,
+    .loader-dot,
+    .loader-text,
+    .loader-bar-fill {
+        animation: none !important;
+        opacity: 1 !important;
+        stroke-dashoffset: 0 !important;
+    }
+
+    body.page-loaded .hero-content > *,
+    body.page-loaded .hero-scroll {
+        animation: none !important;
+        opacity: 1 !important;
+    }
 }
 
 /* === Reset & Base === */
@@ -172,7 +212,7 @@ ul {
     align-items: center;
     justify-content: center;
     z-index: 10000;
-    transition: opacity 0.5s, visibility 0.5s;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 #preloader.hidden {
@@ -181,32 +221,90 @@ ul {
 }
 
 .loader {
-    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 24px;
 }
 
-.loader-ring {
-    width: 80px;
-    height: 80px;
-    border: 3px solid var(--dark-700);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+.loader-logo {
+    width: 100px;
+    height: 100px;
+}
+
+.loader-rect {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: drawRect 1.2s ease-out forwards;
+}
+
+.loader-hex {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: drawHex 1s ease-out 0.3s forwards;
+}
+
+.loader-lines {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: drawLines 0.8s ease-out 0.7s forwards;
+}
+
+.loader-dot {
+    animation: dotReveal 0.4s ease-out 1.1s forwards;
+}
+
+@keyframes drawRect {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawHex {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawLines {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes dotReveal {
+    0% { opacity: 0; r: 0; }
+    100% { opacity: 1; r: 5; }
 }
 
 .loader-text {
-    position: absolute;
     font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 4px;
-    color: var(--white);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--gray-400);
+    opacity: 0;
+    animation: textFadeIn 0.5s ease 0.6s forwards;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+@keyframes textFadeIn {
+    to { opacity: 1; }
+}
+
+.loader-bar {
+    width: 120px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loader-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    animation: barFill 1.5s ease-in-out forwards;
+}
+
+@keyframes barFill {
+    0% { width: 0%; }
+    60% { width: 70%; }
+    100% { width: 100%; }
 }
 
 /* === Navigation === */
@@ -941,7 +1039,7 @@ ul {
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: var(--border-radius);
     padding: 32px;
-    transition: var(--transition);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .security-card:hover {
@@ -3132,6 +3230,159 @@ ul {
     transition: stroke-dashoffset 0.15s linear;
 }
 
+/* === Google Maps in Contact === */
+.contact-map {
+    margin-top: 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+}
+
+.contact-map iframe {
+    display: block;
+}
+
+/* === Network Connection Lines SVG === */
+.network-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.net-line {
+    stroke-dasharray: 6 4;
+    animation: netLineDash 20s linear infinite;
+}
+
+@keyframes netLineDash {
+    to { stroke-dashoffset: -100; }
+}
+
+/* === Magnetic Button Hover Effect === */
+.btn-primary,
+.nav-cta {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary .btn-magnetic-area,
+.nav-cta .btn-magnetic-area {
+    position: absolute;
+    inset: -20px;
+}
+
+/* === Cursor Glow Follower === */
+.cursor-glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.06) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    will-change: transform, left, top;
+}
+
+.cursor-glow.visible {
+    opacity: 1;
+}
+
+/* === Service Icon Micro-Animations === */
+.service-card:hover .service-icon {
+    animation: iconBounce 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes iconBounce {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.25) rotate(-5deg); }
+    70% { transform: scale(0.95) rotate(2deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.security-brand-icon {
+    transition: var(--transition);
+}
+
+.security-card:hover .security-brand-icon {
+    animation: iconPulse 0.6s ease;
+}
+
+@keyframes iconPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+.industry-card:hover .industry-icon {
+    animation: iconShake 0.5s ease;
+}
+
+@keyframes iconShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-3px) rotate(-3deg); }
+    40% { transform: translateX(3px) rotate(3deg); }
+    60% { transform: translateX(-2px) rotate(-1deg); }
+    80% { transform: translateX(2px) rotate(1deg); }
+}
+
+.dell-product-icon {
+    transition: var(--transition);
+}
+
+.dell-product-section:hover .dell-product-icon {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+}
+
+.why-card:hover .why-number {
+    animation: numberPop 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes numberPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* === Staggered Page Content Reveal === */
+.page-reveal [data-aos] {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+body.page-loaded .hero-content > * {
+    animation: contentReveal 0.6s ease forwards;
+    opacity: 0;
+}
+
+body.page-loaded .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+body.page-loaded .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+body.page-loaded .hero-content > *:nth-child(3) { animation-delay: 0.35s; }
+body.page-loaded .hero-content > *:nth-child(4) { animation-delay: 0.5s; }
+body.page-loaded .hero-content > *:nth-child(5) { animation-delay: 0.65s; }
+
+@keyframes contentReveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.page-loaded .hero-scroll {
+    animation: contentReveal 0.6s ease 0.8s forwards;
+    opacity: 0;
+}
+
 /* === Contact Form Validation States === */
 .form-group.valid input,
 .form-group.valid textarea {
@@ -3181,13 +3432,308 @@ ul {
     .section-divider svg {
         height: 24px;
     }
+
+    /* Hide nav pill on mobile */
+    .nav-pill {
+        display: none !important;
+    }
+
+    .cursor-glow {
+        display: none !important;
+    }
+
+    .contact-map iframe {
+        height: 180px;
+    }
+}
+
+/* === Card Spotlight / Gradient Follow Effect (Stripe-style) === */
+.card-spotlight {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.service-card:hover .card-spotlight,
+.why-card:hover .card-spotlight,
+.industry-card:hover .card-spotlight,
+.dell-card:hover .card-spotlight {
+    opacity: 1;
+}
+
+/* Ensure card content stays above spotlight */
+.service-card > *:not(.card-spotlight),
+.why-card > *:not(.card-spotlight),
+.industry-card > *:not(.card-spotlight),
+.dell-card > *:not(.card-spotlight) {
+    position: relative;
+    z-index: 1;
+}
+
+/* === Animated Security Approach Timeline === */
+.approach-step {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.approach-step.timeline-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.approach-connector {
+    opacity: 0;
+    transition: opacity 0.5s ease 0.2s;
+}
+
+.approach-connector.timeline-animate {
+    opacity: 0.4;
+}
+
+.step-number {
+    position: relative;
+}
+
+.approach-step.timeline-animate .step-number {
+    animation: stepNumberPop 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes stepNumberPop {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Progress line under approach steps */
+.approach-steps {
+    position: relative;
+}
+
+.approach-progress-line {
+    position: absolute;
+    top: 30px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.06);
+    z-index: 0;
+    display: none;
+}
+
+.approach-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.approach-progress-line.timeline-animate .approach-progress-fill {
+    width: 100%;
+}
+
+@media (min-width: 1025px) {
+    .approach-progress-line {
+        display: block;
+    }
+}
+
+/* === Section Title Text Reveal Animation (clip-path wipe) === */
+.section-title {
+    overflow: hidden;
+}
+
+.section-title-reveal {
+    display: inline-block;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.section-title-reveal.revealed {
+    clip-path: inset(0 0% 0 0);
+}
+
+/* Also animate the section tag above title */
+.section-tag-reveal {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section-tag-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animate section desc below title */
+.section-desc-reveal {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+}
+
+.section-desc-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === Wave Divider: Contact to Footer === */
+.divider-light-to-dark {
+    background: var(--white);
+}
+
+.divider-light-to-dark svg {
+    display: block;
+}
+
+/* === Navbar Sliding Pill Active Indicator === */
+.nav-pill {
+    position: absolute;
+    bottom: -2px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+}
+
+.nav-pill.visible {
+    opacity: 1;
+}
+
+.nav-menu {
+    position: relative;
+}
+
+/* Remove old underline for nav links (pill replaces it) */
+.nav-link::after {
+    display: none;
+}
+
+/* === Animated Gradient Border Glow on Security Cards === */
+.security-card {
+    position: relative;
+    background: transparent;
+    z-index: 1;
+}
+
+.security-card-border-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.security-card-border-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+        from var(--glow-angle, 0deg),
+        transparent 0%,
+        var(--primary) 25%,
+        var(--accent) 50%,
+        var(--primary-light) 75%,
+        transparent 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: glowRotate 3s linear infinite;
+}
+
+.security-card:hover .security-card-border-glow {
+    opacity: 1;
+}
+
+@keyframes glowRotate {
+    to { --glow-angle: 360deg; }
+}
+
+/* Register custom property for animation */
+@property --glow-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* Security card internal bg to sit on top of glow */
+.security-card-inner-bg {
+    position: absolute;
+    inset: 1px;
+    border-radius: calc(var(--border-radius) - 1px);
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+/* === Enhanced Testimonials: Decorative Quote & Gradient Border === */
+.testimonial-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card::before {
+    content: '\201C';
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-family: Georgia, serif;
+    font-size: 80px;
+    line-height: 1;
+    color: rgba(14, 165, 233, 0.06);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.testimonial-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.testimonial-card:hover::after {
+    transform: scaleX(1);
+}
+
+/* Testimonial card hover glow */
+.testimonial-card:hover {
+    border-color: rgba(14, 165, 233, 0.25);
+    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.08), 0 0 0 1px rgba(14, 165, 233, 0.1);
 }
 
 /* === Print Styles === */
 @media print {
     .navbar, .preloader, .back-to-top, .floating-contact,
     .search-overlay, .scroll-progress, .hero-particles,
-    .hero-scroll {
+    .hero-scroll, .cursor-glow {
         display: none !important;
     }
 
