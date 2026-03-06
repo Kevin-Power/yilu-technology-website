@@ -60,20 +60,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Mobile Navigation Toggle ===
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
+    const navOverlay = document.getElementById('navOverlay');
+
+    function openMobileMenu() {
+        navToggle.classList.add('active');
+        navMenu.classList.add('active');
+        if (navOverlay) navOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        if (navOverlay) navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
     navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        if (navMenu.classList.contains('active')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
     });
+
+    // Close on overlay click
+    if (navOverlay) {
+        navOverlay.addEventListener('click', closeMobileMenu);
+    }
 
     // Close mobile menu on link click
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMobileMenu);
     });
 
     // === Back to Top ===
@@ -681,6 +699,99 @@ document.addEventListener('DOMContentLoaded', () => {
             ticking = true;
         }
     }, { passive: true });
+
+    // === Back-to-Top Progress Ring ===
+    const progressRing = document.getElementById('progressRing');
+    if (progressRing) {
+        const circumference = 2 * Math.PI * 20; // r=20
+        progressRing.style.strokeDasharray = circumference;
+        progressRing.style.strokeDashoffset = circumference;
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+            const offset = circumference - (scrollPercent * circumference);
+            progressRing.style.strokeDashoffset = offset;
+        }, { passive: true });
+    }
+
+    // === Contact Form Real-time Validation ===
+    if (contactForm) {
+        const validators = {
+            name: (v) => v.trim().length >= 2 ? '' : '請輸入至少 2 個字',
+            email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : '請輸入有效的電子信箱',
+            message: (v) => v.trim().length >= 10 ? '' : '請輸入至少 10 個字的需求說明'
+        };
+
+        Object.keys(validators).forEach(fieldName => {
+            const field = contactForm.querySelector(`[name="${fieldName}"]`);
+            if (!field) return;
+
+            // Add error span if not exists
+            let errorSpan = field.parentElement.querySelector('.form-error');
+            if (!errorSpan) {
+                errorSpan = document.createElement('span');
+                errorSpan.className = 'form-error';
+                field.parentElement.appendChild(errorSpan);
+            }
+
+            field.addEventListener('blur', function() {
+                const error = validators[fieldName](this.value);
+                const group = this.closest('.form-group');
+                if (!this.value.trim()) {
+                    group.classList.remove('valid', 'invalid');
+                    errorSpan.textContent = '';
+                } else if (error) {
+                    group.classList.remove('valid');
+                    group.classList.add('invalid');
+                    errorSpan.textContent = error;
+                } else {
+                    group.classList.remove('invalid');
+                    group.classList.add('valid');
+                    errorSpan.textContent = '';
+                }
+            });
+
+            field.addEventListener('input', function() {
+                const group = this.closest('.form-group');
+                if (group.classList.contains('invalid')) {
+                    const error = validators[fieldName](this.value);
+                    if (!error) {
+                        group.classList.remove('invalid');
+                        group.classList.add('valid');
+                        errorSpan.textContent = '';
+                    }
+                }
+            });
+        });
+    }
+
+    // === Testimonials Touch Swipe ===
+    if (testimonialsTrack) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const minSwipeDistance = 50;
+
+        testimonialsTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        testimonialsTrack.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const distance = touchStartX - touchEndX;
+
+            if (Math.abs(distance) >= minSwipeDistance) {
+                if (distance > 0) {
+                    // Swipe left -> next
+                    document.getElementById('testimonialNext')?.click();
+                } else {
+                    // Swipe right -> prev
+                    document.getElementById('testimonialPrev')?.click();
+                }
+            }
+        }, { passive: true });
+    }
 
     // === Initialize ===
     handleScroll();
