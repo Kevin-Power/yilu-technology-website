@@ -3803,6 +3803,211 @@ body.page-loaded .hero-scroll {
     }
 }
 
+/* === Mobile UX Enhancements === */
+
+/* Navbar: group right-side items, hide logo subtitle */
+@media (max-width: 768px) {
+    .nav-container { padding: 0 16px; gap: 8px; }
+    .logo-sub { display: none; }
+    .logo-icon svg { width: 34px; height: 34px; }
+    .lang-toggle { margin-left: auto; }
+}
+
+/* Hero stats: proper 2×2 grid */
+@media (max-width: 768px) {
+    .hero-content { padding: 88px 20px 48px; }
+    .hero-badge { padding: 6px 14px; margin-bottom: 20px; }
+    .hero-badge span { font-size: 12px; }
+    .hero-desc { font-size: 15px; margin-bottom: 28px; }
+    .hero-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+    .stat-item {
+        width: 100%;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px;
+        padding: 14px 10px;
+    }
+    .stat-number { font-size: 28px; }
+    .stat-suffix { font-size: 18px; }
+    .stat-label { font-size: 11px; }
+    .hero-scroll { bottom: 24px; }
+}
+
+/* Section headers */
+@media (max-width: 768px) {
+    .section-header { margin-bottom: 36px; }
+    .section-tag { font-size: 11px; letter-spacing: 2px; }
+    .section-desc { font-size: 15px; }
+}
+
+/* About */
+@media (max-width: 768px) {
+    .about-content h3 { font-size: 20px; }
+    .about-features { gap: 14px; margin-top: 20px; }
+    .about-feature { gap: 12px; }
+    .feature-icon { width: 40px; height: 40px; font-size: 15px; border-radius: 10px; flex-shrink: 0; }
+}
+
+/* Services */
+@media (max-width: 768px) {
+    .service-card { padding: 24px 20px; }
+    .service-card h3 { font-size: 16px; }
+    .service-icon-wrap { margin-bottom: 16px; }
+    .service-icon { width: 48px; height: 48px; font-size: 20px; border-radius: 12px; }
+}
+
+/* Dell */
+@media (max-width: 768px) {
+    .dell-showcase { gap: 24px; }
+    .dell-product-header { margin-bottom: 20px; padding-bottom: 16px; }
+    .dell-product-header h3 { font-size: 17px; }
+    .dell-product-icon { width: 46px; height: 46px; font-size: 19px; border-radius: 11px; }
+    .dell-card { padding: 20px 16px; }
+    .dell-card h4 { font-size: 14px; }
+    .dell-card p { font-size: 13px; }
+    .dell-card-badge { font-size: 9px; padding: 2px 8px; }
+}
+
+/* Security */
+@media (max-width: 768px) {
+    .security-card { padding: 24px 20px; }
+    .security-brand h3 { font-size: 17px; }
+    .security-features { gap: 8px; margin-bottom: 16px; }
+    .security-approach { margin-top: 40px; padding: 28px 20px; border-radius: 14px; }
+    .approach-header { margin-bottom: 24px; }
+    .approach-header h3 { font-size: 17px; }
+    .approach-steps { align-items: stretch; gap: 0; }
+    .approach-connector { display: none; }
+    .approach-step {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        padding: 18px 0;
+        gap: 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .approach-step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-number { font-size: 28px; margin-bottom: 0; line-height: 1.4; flex-shrink: 0; min-width: 36px; }
+    .step-content { flex: 1; }
+    .step-content h4 { font-size: 14px; margin-bottom: 4px; }
+    .step-content p { font-size: 13px; }
+}
+
+/* Why Us */
+@media (max-width: 768px) {
+    .why-card { padding: 24px 20px; }
+    .why-number { font-size: 28px; margin-bottom: 10px; }
+    .why-card h3 { font-size: 16px; }
+}
+
+/* Industries */
+@media (max-width: 768px) {
+    .industry-card { padding: 24px 20px; }
+    .industry-card h3 { font-size: 16px; }
+    .industry-icon { width: 44px; height: 44px; font-size: 18px; margin-bottom: 14px; }
+}
+
+/* FAQ */
+@media (max-width: 768px) {
+    .faq-question { padding: 16px 18px; gap: 12px; }
+    .faq-question span { font-size: 14px; }
+    .faq-answer { padding: 0 18px; }
+    .faq-item.active .faq-answer { padding: 0 18px 16px; }
+}
+
+/* Partners: 2-column grid on mobile */
+@media (max-width: 768px) {
+    .partners { padding: 48px 0; }
+    .partners-banner { padding: 28px 20px; border-radius: 12px; }
+    .partners-banner h3 { font-size: 17px; margin-bottom: 20px; }
+    .partners-logos { justify-content: flex-start; gap: 0; }
+    .partner-logo-item {
+        width: 50%;
+        padding: 14px 12px;
+        font-size: 14px;
+        border-bottom: 1px solid var(--gray-200);
+        border-radius: 0;
+    }
+    .partner-logo-item:nth-child(odd) { border-right: 1px solid var(--gray-200); }
+    .partner-logo-item:nth-last-child(1),
+    .partner-logo-item:nth-last-child(2) { border-bottom: none; }
+    .partner-logo-item i { font-size: 20px; }
+}
+
+/* Testimonials */
+@media (max-width: 768px) {
+    .testimonial-card { padding: 24px 20px; }
+    .testimonial-text { font-size: 14px; }
+    .testimonials-nav { margin-top: 20px; gap: 12px; }
+}
+
+/* CTA */
+@media (max-width: 768px) {
+    .cta-section { padding: 72px 0; }
+    .cta-content h2 { font-size: clamp(20px, 5.5vw, 28px); }
+    .cta-content p { font-size: 15px; }
+    .cta-actions .btn-lg { padding: 14px 28px; font-size: 15px; }
+}
+
+/* Contact */
+@media (max-width: 768px) {
+    .contact-info-card { padding: 24px 20px; border-radius: 12px; }
+    .contact-info-card h3 { font-size: 18px; }
+    .contact-details { gap: 18px; }
+    .contact-detail { gap: 12px; }
+    .contact-icon { width: 38px; height: 38px; font-size: 14px; border-radius: 8px; }
+    .quick-link-tags { gap: 6px; }
+    .quick-link-tags a { font-size: 11px; padding: 5px 11px; }
+}
+
+/* Footer: single column on mobile */
+@media (max-width: 768px) {
+    .footer { padding: 40px 0 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; }
+    .footer-logo span { font-size: 16px; }
+    .footer-brand p { font-size: 13px; }
+    .footer-links h4 { font-size: 13px; margin-bottom: 12px; }
+    .footer-links ul { gap: 10px; }
+    .footer-bottom { padding: 16px 0; }
+    .footer-bottom p { font-size: 12px; }
+}
+
+/* Back to Top */
+@media (max-width: 768px) {
+    .back-to-top { width: 42px; height: 42px; right: 20px; bottom: 24px; border-radius: 10px; }
+}
+
+/* Floating Contact */
+@media (max-width: 768px) {
+    .floating-option { padding: 10px 14px; font-size: 13px; }
+}
+
+/* 480px: fix partners conflict (override flex-direction: column from existing rule) */
+@media (max-width: 480px) {
+    .partners-logos { flex-direction: row; flex-wrap: wrap; }
+    .partner-logo-item { width: 100%; border-right: none !important; border-bottom: 1px solid var(--gray-200) !important; }
+    .partner-logo-item:last-child { border-bottom: none !important; }
+}
+
+/* Small phones < 380px */
+@media (max-width: 380px) {
+    .hero-content { padding: 80px 16px 40px; }
+    .service-card, .why-card, .industry-card { padding: 20px 16px; }
+    .security-card { padding: 20px 16px; }
+    .dell-card { padding: 16px 12px; }
+    .dell-product-section { padding: 20px 16px !important; }
+    .security-approach { padding: 24px 16px; }
+    .contact-info-card { padding: 20px 16px; }
+    .partners-banner { padding: 24px 16px; }
+}
+
 /* === Print Styles === */
 @media print {
     .navbar, .preloader, .back-to-top, .floating-contact,
