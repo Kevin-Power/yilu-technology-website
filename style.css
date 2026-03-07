@@ -456,9 +456,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    /* Force compositing layer so animated children are properly clipped */
-    transform: translateZ(0);
+    overflow: clip; /* clip instead of hidden: properly clips composited layers without stacking-context side-effects */
     isolation: isolate;
 }
 
@@ -3827,7 +3825,6 @@ body.page-loaded .hero-visual {
     width: 100%;
     position: relative;
     z-index: 1;
-    flex: 1;
 }
 
 .hero-content {

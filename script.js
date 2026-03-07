@@ -730,7 +730,9 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                const offsetTop = target.offsetTop - 80;
+                const navbar = document.getElementById('navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                const offsetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
@@ -806,14 +808,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Typing effect for hero (optional enhancement) ===
     // The hero is already well-designed with static text, keeping it clean.
 
-    // === Parallax-like effect on scroll ===
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        const heroGradient = document.querySelector('.hero-gradient');
-        if (heroGradient && scrolled < window.innerHeight) {
-            heroGradient.style.transform = `translateY(${scrolled * 0.3}px)`;
-        }
-    }, { passive: true });
+    // Parallax on hero-gradient removed: caused compositing/z-index artifacts on Safari
+    // and was a contributing factor to sections being covered by the hero.
 
     // === Service Search System ===
     const searchOverlay = document.getElementById('searchOverlay');
@@ -1003,7 +999,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (target) {
                     closeSearch();
                     setTimeout(() => {
-                        const offsetTop = target.offsetTop - 80;
+                        const navbar = document.getElementById('navbar');
+                        const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                        const offsetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
                         window.scrollTo({ top: offsetTop, behavior: 'smooth' });
                     }, 200);
                 }
