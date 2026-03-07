@@ -574,18 +574,33 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.max(0, Math.round(offsetTop));
     }
 
+    function alignTargetIntoView(target) {
+        target.scrollIntoView({
+            block: 'start',
+            inline: 'nearest',
+            behavior: 'auto'
+        });
+    }
+
     function smoothScrollToTarget(target, delay = 0) {
         const performScroll = () => {
-            const behavior = isIOSDevice ? 'auto' : 'smooth';
+            if (isIOSDevice) {
+                // iOS Safari: native element alignment is more stable than computed scrollTo offsets.
+                alignTargetIntoView(target);
+                [240, 520, 900].forEach(ms => {
+                    setTimeout(() => {
+                        alignTargetIntoView(target);
+                    }, ms);
+                });
+                return;
+            }
+
             window.scrollTo({
                 top: getTargetScrollTop(target),
-                behavior
+                behavior: 'smooth'
             });
 
-            // iOS Safari can settle at a slightly wrong position during/after smooth scroll.
-            // Re-check and snap once to the exact target if needed.
-            const correctionDelays = isIOSDevice ? [240, 520, 900] : [420, 900];
-            correctionDelays.forEach(ms => {
+            [420, 900].forEach(ms => {
                 setTimeout(() => {
                     const correctedTop = getTargetScrollTop(target);
                     if (Math.abs(window.scrollY - correctedTop) > 2) {
@@ -791,8 +806,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const hash = this.getAttribute('href');
             const target = getHashTarget(hash);
             if (target) {
-                e.preventDefault();
                 const fromMobileNav = window.innerWidth <= 768 && this.closest('#navMenu') !== null;
+
+                if (isIOSDevice && !fromMobileNav) {
+                    // Keep native hash scrolling on iOS for regular links.
+                    return;
+                }
+
+                e.preventDefault();
+                if (fromMobileNav) {
+                    closeMobileMenu();
+                }
                 smoothScrollToTarget(target, fromMobileNav ? 360 : 0);
             }
         });
