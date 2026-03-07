@@ -459,6 +459,7 @@ ul {
     overflow: hidden; /* fallback for browsers without overflow: clip */
     overflow: clip; /* preferred: clips composited layers without hidden-side effects */
     isolation: isolate;
+    z-index: 0;
 }
 
 .hero-bg {
@@ -693,8 +694,29 @@ ul {
 }
 
 /* === Section Styles === */
+.trust-strip,
+.section-divider,
+.section,
+.footer {
+    position: relative;
+    z-index: 1;
+}
+
 .section {
     padding: var(--section-padding) 0;
+}
+
+/* iOS Safari stability mode: reduce risky compositing effects in hero */
+html.is-ios .hero {
+    overflow: hidden;
+    contain: paint;
+    isolation: auto;
+}
+
+html.is-ios .hero-particles,
+html.is-ios .hero-grid-pattern,
+html.is-ios .hero-orb {
+    display: none !important;
 }
 
 .section-header {
