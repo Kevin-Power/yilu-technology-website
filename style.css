@@ -724,7 +724,13 @@ html.is-ios {
 }
 
 html.is-ios .navbar {
+    position: sticky;
+    top: 0;
     transform: translateY(0) !important;
+}
+
+html.is-ios .hero {
+    min-height: calc(100svh - var(--anchor-offset, 96px));
 }
 
 html.is-ios .hero-bg {

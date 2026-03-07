@@ -661,18 +661,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.getElementById('navMenu');
     const navOverlay = document.getElementById('navOverlay');
 
+    function lockBodyScroll() {
+        // iOS webviews/Safari can get stuck if body overflow is locked.
+        if (isIOSDevice) return;
+        document.body.style.overflow = 'hidden';
+    }
+
+    function unlockBodyScroll() {
+        document.body.style.overflow = '';
+    }
+
     function openMobileMenu() {
         navToggle.classList.add('active');
         navMenu.classList.add('active');
         if (navOverlay) navOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        lockBodyScroll();
     }
 
     function closeMobileMenu() {
         navToggle.classList.remove('active');
         navMenu.classList.remove('active');
         if (navOverlay) navOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
     }
 
     navToggle.addEventListener('click', () => {
@@ -687,6 +697,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navOverlay) {
         navOverlay.addEventListener('click', closeMobileMenu);
     }
+
+    // Safety unlocks for iOS/webview edge cases.
+    window.addEventListener('pageshow', unlockBodyScroll);
+    window.addEventListener('hashchange', unlockBodyScroll);
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) unlockBodyScroll();
+    });
 
     // Close mobile menu on link click
     navLinks.forEach(link => {
@@ -997,13 +1014,13 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.value = '';
         searchResults.innerHTML = '';
         searchSuggestions.style.display = '';
-        document.body.style.overflow = 'hidden';
+        lockBodyScroll();
         setTimeout(() => searchInput.focus(), 100);
     }
 
     function closeSearch() {
         searchOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
         searchInput.value = '';
     }
 
