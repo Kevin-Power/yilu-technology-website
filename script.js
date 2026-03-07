@@ -257,7 +257,13 @@ const TRANSLATIONS = {
         // Floating
         'float-phone': '撥打電話',
         'float-email': '發送 Email',
+        'float-line': 'LINE 聯繫',
         'float-form': '諮詢表單',
+        // About Achievements
+        'ach1': '年業界深耕',
+        'ach2': '企業客戶信賴',
+        'ach3': '成功導入專案',
+        'ach4': '國際品牌授權',
     },
     en: {
         // Nav
@@ -505,7 +511,13 @@ const TRANSLATIONS = {
         // Floating
         'float-phone': 'Call Us',
         'float-email': 'Send Email',
+        'float-line': 'LINE Message',
         'float-form': 'Contact Form',
+        // About Achievements
+        'ach1': 'Years of Expertise',
+        'ach2': 'Enterprise Clients',
+        'ach3': 'Projects Completed',
+        'ach4': 'Global Brands',
     }
 };
 
@@ -636,7 +648,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const counters = entry.target.querySelectorAll('.stat-number');
+                const counters = entry.target.querySelectorAll('.stat-number, .ach-count');
                 counters.forEach(counter => {
                     animateCounter(counter);
                 });
@@ -648,6 +660,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const statsSection = document.querySelector('.hero-stats');
     if (statsSection) {
         counterObserver.observe(statsSection);
+    }
+
+    const achievementsSection = document.querySelector('.about-achievements');
+    if (achievementsSection) {
+        counterObserver.observe(achievementsSection);
     }
 
     function animateCounter(element) {
