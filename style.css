@@ -708,9 +708,14 @@ ul {
 
 /* iOS Safari stability mode: reduce risky compositing effects in hero */
 html.is-ios .hero {
+    background: var(--gradient-hero);
     overflow: hidden;
     contain: paint;
     isolation: auto;
+}
+
+html.is-ios .hero-bg {
+    display: none;
 }
 
 html.is-ios .hero-particles,
