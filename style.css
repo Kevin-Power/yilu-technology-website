@@ -3803,6 +3803,204 @@ body.page-loaded .hero-scroll {
     }
 }
 
+/* === Visual Polish & Enhancement === */
+
+/* Why Us — card header with icon */
+.why-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.why-card-header .why-number {
+    margin-bottom: 0;
+}
+
+.why-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(14, 165, 233, 0.08);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--primary);
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.why-card:hover .why-icon {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+    transform: scale(1.1) rotate(-5deg);
+}
+
+/* Testimonial — colored avatar initials */
+.testimonial-avatar {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.testimonial-avatar span {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.testimonial-avatar i {
+    display: none; /* hide any residual icon */
+}
+
+.avatar-blue {
+    background: linear-gradient(135deg, #0ea5e9, #6366f1);
+    border: none;
+}
+
+.avatar-green {
+    background: linear-gradient(135deg, #10b981, #0ea5e9);
+    border: none;
+}
+
+.avatar-purple {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    border: none;
+}
+
+.avatar-amber {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    border: none;
+}
+
+/* Service cards — distinct accent color per card type */
+.services-grid .service-card:nth-child(1) .service-icon {
+    background: linear-gradient(135deg, rgba(14,165,233,0.12), rgba(14,165,233,0.04));
+    color: #0ea5e9;
+}
+.services-grid .service-card:nth-child(2) .service-icon {
+    background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.04));
+    color: #ef4444;
+}
+.services-grid .service-card:nth-child(3) .service-icon {
+    background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(99,102,241,0.04));
+    color: #6366f1;
+}
+.services-grid .service-card:nth-child(4) .service-icon {
+    background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04));
+    color: #10b981;
+}
+
+/* Service card — per-card hover accent color */
+.services-grid .service-card:nth-child(1)::before { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+.services-grid .service-card:nth-child(2)::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+.services-grid .service-card:nth-child(3)::before { background: linear-gradient(90deg, #6366f1, #818cf8); }
+.services-grid .service-card:nth-child(4)::before { background: linear-gradient(90deg, #10b981, #34d399); }
+
+/* Industry solutions — more vibrant tags */
+.industry-solutions span {
+    background: rgba(14, 165, 233, 0.08);
+    color: var(--primary);
+    border: 1px solid rgba(14, 165, 233, 0.25);
+    transition: var(--transition);
+}
+
+.industry-card:hover .industry-solutions span {
+    background: rgba(14, 165, 233, 0.15);
+    border-color: rgba(14, 165, 233, 0.4);
+}
+
+/* Partners — per-brand accent color */
+.partner-logo-item:nth-child(1) i { color: #0072C6; }  /* Dell blue */
+.partner-logo-item:nth-child(2) i { color: #e8372c; }  /* CrowdStrike red */
+.partner-logo-item:nth-child(3) i { color: #f59e0b; }  /* KnowBe4 amber */
+.partner-logo-item:nth-child(4) i { color: #10b981; }  /* SSC green */
+
+.partner-logo-item:nth-child(1):hover { background: rgba(0,114,198,0.06); color: #0072C6; }
+.partner-logo-item:nth-child(2):hover { background: rgba(232,55,44,0.06); color: #e8372c; }
+.partner-logo-item:nth-child(3):hover { background: rgba(245,158,11,0.06); color: #d97706; }
+.partner-logo-item:nth-child(4):hover { background: rgba(16,185,129,0.06); color: #059669; }
+
+/* Footer — social links */
+.footer-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.footer-social-link {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-400);
+    font-size: 15px;
+    transition: var(--transition);
+}
+
+.footer-social-link:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+}
+
+/* FAQ — enhanced active state */
+.faq-item.active .faq-question span {
+    color: var(--primary);
+}
+
+.faq-item.active {
+    border-color: rgba(14, 165, 233, 0.4);
+    box-shadow: 0 4px 24px rgba(14, 165, 233, 0.08);
+}
+
+/* Section title — subtle gradient underline accent */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    margin: 14px auto 0;
+}
+
+/* Contact form — better focus ring */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);
+    background: rgba(14, 165, 233, 0.02);
+}
+
+/* Floating contact — Line option support */
+.floating-option.line {
+    background: #06c755;
+}
+
+/* Trust strip — slightly improved */
+.trust-strip {
+    border-top: 1px solid rgba(14, 165, 233, 0.1);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+}
+
+/* Mobile: why-card-header layout fix */
+@media (max-width: 768px) {
+    .why-card-header { margin-bottom: 14px; }
+    .why-icon { width: 38px; height: 38px; font-size: 16px; border-radius: 10px; }
+    .why-number { font-size: 28px; }
+    .footer-social { margin-top: 20px; }
+}
+
 /* === Mobile UX Enhancements === */
 
 /* Navbar: group right-side items, hide logo subtitle */
