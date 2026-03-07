@@ -553,6 +553,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return navbar ? navbar.getBoundingClientRect().height : 80;
     }
 
+    function syncAnchorOffset() {
+        const extraSpacing = window.innerWidth <= 768 ? 18 : 12;
+        const offset = Math.ceil(getNavbarHeight() + extraSpacing);
+        document.documentElement.style.setProperty('--anchor-offset', `${offset}px`);
+    }
+
     function getHashTarget(hash) {
         if (!hash || hash === '#') return null;
         try {
@@ -570,14 +576,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function smoothScrollToTarget(target, delay = 0) {
         const performScroll = () => {
+            const behavior = isIOSDevice ? 'auto' : 'smooth';
             window.scrollTo({
                 top: getTargetScrollTop(target),
-                behavior: 'smooth'
+                behavior
             });
 
             // iOS Safari can settle at a slightly wrong position during/after smooth scroll.
             // Re-check and snap once to the exact target if needed.
-            [420, 900].forEach(ms => {
+            const correctionDelays = isIOSDevice ? [240, 520, 900] : [420, 900];
+            correctionDelays.forEach(ms => {
                 setTimeout(() => {
                     const correctedTop = getTargetScrollTop(target);
                     if (Math.abs(window.scrollY - correctedTop) > 2) {
@@ -603,6 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             navbar.classList.remove('scrolled');
         }
+        syncAnchorOffset();
 
         // Active nav link
         const activationLine = getNavbarHeight() + 20;
@@ -630,6 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', syncAnchorOffset);
 
     // === Mobile Navigation Toggle ===
     const navToggle = document.getElementById('navToggle');
@@ -1254,21 +1264,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Navbar Hide/Show on Scroll ===
     let lastScrollY = 0;
     let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const currentScrollY = window.scrollY;
-                if (currentScrollY > 600 && currentScrollY > lastScrollY + 5) {
-                    navbar.style.transform = 'translateY(-100%)';
-                } else {
-                    navbar.style.transform = 'translateY(0)';
-                }
-                lastScrollY = currentScrollY;
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
+    if (!isIOSDevice) {
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const currentScrollY = window.scrollY;
+                    if (currentScrollY > 600 && currentScrollY > lastScrollY + 5) {
+                        navbar.style.transform = 'translateY(-100%)';
+                    } else {
+                        navbar.style.transform = 'translateY(0)';
+                    }
+                    lastScrollY = currentScrollY;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+    } else {
+        navbar.style.transform = 'translateY(0)';
+    }
 
     // === Back-to-Top Progress Ring ===
     const progressRing = document.getElementById('progressRing');
@@ -1631,6 +1645,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // === Initialize ===
+    syncAnchorOffset();
     handleScroll();
     // Initialize language (must run after section title reveal spans are created)
     setLanguage(currentLang);

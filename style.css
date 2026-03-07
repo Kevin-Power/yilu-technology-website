@@ -163,7 +163,12 @@ textarea:focus-visible {
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: var(--anchor-offset, 80px);
+}
+
+main[id],
+section[id] {
+    scroll-margin-top: var(--anchor-offset, 96px);
 }
 
 body {
@@ -712,6 +717,14 @@ html.is-ios .hero {
     overflow: hidden;
     contain: paint;
     isolation: auto;
+}
+
+html.is-ios {
+    scroll-behavior: auto;
+}
+
+html.is-ios .navbar {
+    transform: translateY(0) !important;
 }
 
 html.is-ios .hero-bg {
