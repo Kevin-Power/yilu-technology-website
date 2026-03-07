@@ -543,6 +543,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
 
+    function getNavbarHeight() {
+        return navbar ? navbar.getBoundingClientRect().height : 80;
+    }
+
+    function getHashTarget(hash) {
+        if (!hash || hash === '#') return null;
+        try {
+            return document.querySelector(hash);
+        } catch {
+            return null;
+        }
+    }
+
+    function getTargetScrollTop(target) {
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+        const offsetTop = targetTop - getNavbarHeight();
+        return Math.max(0, Math.round(offsetTop));
+    }
+
+    function smoothScrollToTarget(target) {
+        window.scrollTo({
+            top: getTargetScrollTop(target),
+            behavior: 'smooth'
+        });
+    }
+
     function handleScroll() {
         const scrollY = window.scrollY;
 
@@ -554,12 +580,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Active nav link
+        const activationLine = getNavbarHeight() + 20;
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionHeight = section.offsetHeight;
+            const rect = section.getBoundingClientRect();
             const sectionId = section.getAttribute('id');
 
-            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            if (rect.top <= activationLine && rect.bottom > activationLine) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${sectionId}`) {
@@ -727,16 +753,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Smooth Scroll for all anchor links ===
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const hash = this.getAttribute('href');
+            const target = getHashTarget(hash);
             if (target) {
-                const navbar = document.getElementById('navbar');
-                const navbarHeight = navbar ? navbar.offsetHeight : 80;
-                const offsetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+                e.preventDefault();
+                smoothScrollToTarget(target);
             }
         });
     });
@@ -999,10 +1020,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (target) {
                     closeSearch();
                     setTimeout(() => {
-                        const navbar = document.getElementById('navbar');
-                        const navbarHeight = navbar ? navbar.offsetHeight : 80;
-                        const offsetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
-                        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                        smoothScrollToTarget(target);
                     }, 200);
                 }
             });

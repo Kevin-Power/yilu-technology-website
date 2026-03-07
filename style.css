@@ -456,7 +456,8 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: clip; /* clip instead of hidden: properly clips composited layers without stacking-context side-effects */
+    overflow: hidden; /* fallback for browsers without overflow: clip */
+    overflow: clip; /* preferred: clips composited layers without hidden-side effects */
     isolation: isolate;
 }
 
