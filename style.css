@@ -711,30 +711,27 @@ ul {
     padding: var(--section-padding) 0;
 }
 
-/* iOS Safari stability mode — nuclear approach:
-   Strip ALL compositing, clipping, containment, and isolation from .hero.
-   Previous attempts proved that overflow:clip, contain:paint, isolation:isolate
-   (individually or combined) all cause iOS compositor to elevate the hero layer
-   above subsequent sibling sections despite z-index ordering.
-   The ONLY safe approach: make .hero a plain block element on iOS. */
+/* iOS Safari stability mode: use static hero layout to avoid compositor bugs */
 html.is-ios .hero {
     background: var(--gradient-hero);
-    overflow: visible;      /* NO clipping — decorative children are hidden anyway */
-    isolation: auto;        /* NO stacking context from isolation */
-    contain: none;          /* NO paint containment */
+    position: static;
+    display: block;
+    min-height: auto;
+    padding: calc(var(--anchor-offset, 96px) + 24px) 0 56px;
+    overflow: visible;
+    isolation: auto;
+    contain: none;
     -webkit-transform: none;
     transform: none;
     will-change: auto;
-    min-height: 100svh;     /* Use svh (small viewport height) for iOS dynamic toolbar */
-    z-index: 0;
+    z-index: auto;
 }
 
 html.is-ios {
     scroll-behavior: auto;
 }
 
-/* iOS: keep navbar fixed (not sticky) but disable hide-on-scroll via JS.
-   position:sticky inside flex/complex layouts is unreliable on iOS Safari. */
+/* Keep navbar fixed on iOS; JS already disables hide-on-scroll */
 html.is-ios .navbar {
     position: fixed;
     top: 0;
@@ -743,8 +740,7 @@ html.is-ios .navbar {
     transform: translateY(0) !important;
 }
 
-/* Hide ALL decorative hero sub-layers on iOS — they are the source of
-   additional compositor layers that cause rendering issues */
+/* Hide decorative hero layers on iOS to prevent extra compositor layers */
 html.is-ios .hero-bg,
 html.is-ios .hero-particles,
 html.is-ios .hero-gradient,
@@ -754,11 +750,32 @@ html.is-ios .hero-scroll {
     display: none !important;
 }
 
-/* The hero-inner needs no special positioning on iOS —
-   just be a normal flex child */
 html.is-ios .hero-inner {
+    display: block;
     position: static;
     z-index: auto;
+}
+
+html.is-ios .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Avoid blank hero if IntersectionObserver/AOS timing misfires on iOS */
+html.is-ios .hero [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+html.is-ios body.page-loaded .hero-content > *,
+html.is-ios body.page-loaded .hero-visual,
+html.is-ios body.page-loaded .hero-scroll {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .section-header {

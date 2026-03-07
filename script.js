@@ -733,9 +733,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('[data-aos]').forEach(el => {
-        animationObserver.observe(el);
-    });
+    const aosElements = document.querySelectorAll('[data-aos]');
+    if (isIOSDevice) {
+        aosElements.forEach(el => {
+            el.classList.add('aos-animate');
+        });
+    } else {
+        aosElements.forEach(el => {
+            animationObserver.observe(el);
+        });
+    }
 
     // === Counter Animation ===
     const counterObserver = new IntersectionObserver((entries) => {
