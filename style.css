@@ -457,6 +457,9 @@ ul {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    /* Force compositing layer so animated children are properly clipped */
+    transform: translateZ(0);
+    isolation: isolate;
 }
 
 .hero-bg {
@@ -481,7 +484,7 @@ ul {
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     text-align: center;
     padding: 120px 24px 80px;
     max-width: 900px;
@@ -2976,8 +2979,8 @@ ul {
     border-radius: 50%;
     filter: blur(80px);
     opacity: 0.4;
-    will-change: transform;
     pointer-events: none;
+    /* Removed will-change: transform — caused filter blur to bleed past overflow:hidden */
 }
 
 .hero-orb-1 {
@@ -3823,7 +3826,7 @@ body.page-loaded .hero-visual {
     padding: 0 24px;
     width: 100%;
     position: relative;
-    z-index: 2;
+    z-index: 1;
     flex: 1;
 }
 
