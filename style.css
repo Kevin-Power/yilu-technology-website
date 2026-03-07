@@ -711,36 +711,54 @@ ul {
     padding: var(--section-padding) 0;
 }
 
-/* iOS Safari stability mode: reduce risky compositing effects in hero */
+/* iOS Safari stability mode — nuclear approach:
+   Strip ALL compositing, clipping, containment, and isolation from .hero.
+   Previous attempts proved that overflow:clip, contain:paint, isolation:isolate
+   (individually or combined) all cause iOS compositor to elevate the hero layer
+   above subsequent sibling sections despite z-index ordering.
+   The ONLY safe approach: make .hero a plain block element on iOS. */
 html.is-ios .hero {
     background: var(--gradient-hero);
-    overflow: hidden;
-    contain: paint;
-    isolation: auto;
+    overflow: visible;      /* NO clipping — decorative children are hidden anyway */
+    isolation: auto;        /* NO stacking context from isolation */
+    contain: none;          /* NO paint containment */
+    -webkit-transform: none;
+    transform: none;
+    will-change: auto;
+    min-height: 100svh;     /* Use svh (small viewport height) for iOS dynamic toolbar */
+    z-index: 0;
 }
 
 html.is-ios {
     scroll-behavior: auto;
 }
 
+/* iOS: keep navbar fixed (not sticky) but disable hide-on-scroll via JS.
+   position:sticky inside flex/complex layouts is unreliable on iOS Safari. */
 html.is-ios .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     transform: translateY(0) !important;
 }
 
-html.is-ios .hero {
-    min-height: calc(100svh - var(--anchor-offset, 96px));
-}
-
-html.is-ios .hero-bg {
-    display: none;
-}
-
+/* Hide ALL decorative hero sub-layers on iOS — they are the source of
+   additional compositor layers that cause rendering issues */
+html.is-ios .hero-bg,
 html.is-ios .hero-particles,
+html.is-ios .hero-gradient,
 html.is-ios .hero-grid-pattern,
-html.is-ios .hero-orb {
+html.is-ios .hero-orb,
+html.is-ios .hero-scroll {
     display: none !important;
+}
+
+/* The hero-inner needs no special positioning on iOS —
+   just be a normal flex child */
+html.is-ios .hero-inner {
+    position: static;
+    z-index: auto;
 }
 
 .section-header {
