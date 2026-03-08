@@ -530,19 +530,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === Preloader with Staggered Content Reveal ===
     const preloader = document.getElementById('preloader');
-    function hidePreloader() {
-        preloader.classList.add('hidden');
-        // Trigger staggered content reveal after preloader hides
-        setTimeout(() => {
-            document.body.classList.add('page-loaded');
-        }, 200);
+    const isTouchEarly = document.documentElement.classList.contains('is-touch');
+    if (isTouchEarly) {
+        // Touch devices: skip preloader animation entirely, show content now.
+        // Preloader is already display:none via inline CSS.
+        document.body.classList.add('page-loaded');
+        if (preloader) {
+            preloader.classList.add('hidden');
+            preloader.remove(); // Remove from DOM to eliminate any compositor layer
+        }
+    } else {
+        function hidePreloader() {
+            preloader.classList.add('hidden');
+            setTimeout(() => {
+                document.body.classList.add('page-loaded');
+            }, 200);
+        }
+        window.addEventListener('load', () => {
+            setTimeout(hidePreloader, 1800);
+        });
+        setTimeout(hidePreloader, 3500);
     }
-    window.addEventListener('load', () => {
-        // Wait for SVG draw animation to complete, then hide
-        setTimeout(hidePreloader, 1800);
-    });
-    // Fallback: hide preloader after 3.5s regardless
-    setTimeout(hidePreloader, 3500);
 
     // === Navbar Scroll Effect ===
     const navbar = document.getElementById('navbar');
@@ -795,9 +803,10 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(updateCounter);
     }
 
-    // === Hero Particles ===
+    // === Hero Particles (skip on touch devices — hidden via CSS and wastes memory) ===
+    const isTouchDevice = document.documentElement.classList.contains('is-touch');
     const particlesContainer = document.getElementById('heroParticles');
-    if (particlesContainer) {
+    if (particlesContainer && !isTouchDevice) {
         createParticles();
     }
 
@@ -1272,8 +1281,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // === Hero Typing Effect ===
+    // === Typing effect for hero (skip on touch to avoid layout shifts) ===
     const heroTitleGradient = document.querySelector('.hero-title-gradient');
-    if (heroTitleGradient) {
+    if (heroTitleGradient && !isTouchDevice) {
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -1294,18 +1304,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (!isDeleting && charIndex === currentPhrase.length) {
-                typingSpeed = 2500; // Pause at end
+                typingSpeed = 2500;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
-                typingSpeed = 400; // Pause before next word
+                typingSpeed = 400;
             }
 
             setTimeout(typeEffect, typingSpeed);
         }
 
-        // Start typing after initial animation
         setTimeout(typeEffect, 3000);
     }
 

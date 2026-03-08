@@ -40,68 +40,114 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="style.css?v=20260308-touch-safe">
-    <!-- CRITICAL: Touch-device hero safety net. Pure CSS, no JS dependency.
-         Fires immediately on parse — before any script runs. -->
+    <!-- STEP 1: Synchronous touch detection — runs BEFORE body parsing -->
+    <script>
+    (function(){
+        var t = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (t) document.documentElement.className += ' is-touch';
+    })();
+    </script>
+    <!-- STEP 2: Touch-safe hero — uses class from step 1, NOT media query -->
     <style id="touch-hero-fix">
-    @media (hover: none) and (pointer: coarse) {
-        .hero {
-            position: static !important;
-            display: block !important;
-            min-height: auto !important;
-            height: auto !important;
-            overflow: visible !important;
-            isolation: auto !important;
-            contain: none !important;
-            -webkit-transform: none !important;
-            transform: none !important;
-            will-change: auto !important;
-            z-index: auto !important;
-            background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e293b 100%) !important;
-            padding: 100px 0 48px !important;
-        }
-        .hero-bg,
-        .hero-particles,
-        .hero-gradient,
-        .hero-grid-pattern,
-        .hero-orb,
-        .hero-scroll {
-            display: none !important;
-        }
-        .hero-inner {
-            display: block !important;
-            position: static !important;
-            z-index: auto !important;
-        }
-        .hero-visual {
-            display: none !important;
-        }
-        .hero-content {
-            position: static !important;
-            z-index: auto !important;
-            max-width: 700px !important;
-            margin: 0 auto !important;
-            padding: 0 20px !important;
-            text-align: center !important;
-        }
-        /* Force ALL hero children visible — override AOS + page-loaded animations */
-        .hero *,
-        .hero [data-aos],
-        .hero-content > * {
-            opacity: 1 !important;
-            transform: none !important;
-            transition: none !important;
-            animation: none !important;
-            visibility: visible !important;
-        }
-        .hero-actions {
-            justify-content: center !important;
-        }
-        .hero-stats {
-            justify-content: center !important;
-            flex-wrap: wrap !important;
-        }
+    /* Primary: class-based (set synchronously above) */
+    html.is-touch .hero {
+        position: relative !important;
+        display: block !important;
+        min-height: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        isolation: auto !important;
+        contain: none !important;
+        -webkit-transform: none !important;
+        transform: none !important;
+        will-change: auto !important;
+        z-index: 0 !important;
+        background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e293b 100%) !important;
+        padding: 100px 0 48px !important;
     }
+    html.is-touch .hero-bg,
+    html.is-touch .hero-particles,
+    html.is-touch .hero-gradient,
+    html.is-touch .hero-grid-pattern,
+    html.is-touch .hero-orb,
+    html.is-touch .hero-scroll {
+        display: none !important;
+    }
+    html.is-touch .hero-inner {
+        display: block !important;
+        position: static !important;
+        z-index: auto !important;
+    }
+    html.is-touch .hero-visual {
+        display: none !important;
+    }
+    html.is-touch .hero-content {
+        position: static !important;
+        z-index: auto !important;
+        max-width: 700px !important;
+        margin: 0 auto !important;
+        padding: 0 20px !important;
+        text-align: center !important;
+    }
+    html.is-touch .hero *,
+    html.is-touch .hero [data-aos],
+    html.is-touch .hero-content > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+        visibility: visible !important;
+    }
+    html.is-touch .hero-actions { justify-content: center !important; }
+    html.is-touch .hero-stats { justify-content: center !important; flex-wrap: wrap !important; }
+    /* Guarantee sections BELOW hero have opaque backgrounds */
+    html.is-touch .trust-strip { background: #0f172a !important; }
+    html.is-touch .section { background: var(--gray-50, #f8fafc) !important; }
+    html.is-touch .section.security,
+    html.is-touch .section.why-us,
+    html.is-touch .section.testimonials,
+    html.is-touch .cta-section { background: #0f172a !important; }
+    html.is-touch .footer { background: #020617 !important; }
+    /* Force ALL page [data-aos] visible — no entrance animations on touch */
+    html.is-touch [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    /* Kill page-loaded hero animations completely */
+    html.is-touch .hero-content > *,
+    html.is-touch .hero-visual {
+        animation: none !important;
+    }
+    /* Remove preloader immediately on touch (loaded via JS below anyway) */
+    html.is-touch #preloader { display: none !important; }
+    </style>
+    <link rel="stylesheet" href="style.css?v=20260308-touch-v2">
+    <!-- STEP 3: Re-assert touch overrides AFTER external CSS to guarantee cascade victory -->
+    <style id="touch-hero-final">
+    html.is-touch .hero {
+        position: relative !important;
+        display: block !important;
+        min-height: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        isolation: auto !important;
+        contain: none !important;
+        z-index: 0 !important;
+        background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e293b 100%) !important;
+        padding: 100px 0 48px !important;
+    }
+    html.is-touch .hero-bg,
+    html.is-touch .hero-particles,
+    html.is-touch .hero-gradient,
+    html.is-touch .hero-grid-pattern,
+    html.is-touch .hero-orb,
+    html.is-touch .hero-scroll,
+    html.is-touch .hero-visual,
+    html.is-touch #preloader { display: none !important; }
+    html.is-touch .hero-inner { display: block !important; position: static !important; }
+    html.is-touch .hero-content { position: static !important; max-width: 700px !important; margin: 0 auto !important; padding: 0 20px !important; text-align: center !important; }
+    html.is-touch .hero *, html.is-touch [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
     </style>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230ea5e9'/><text y='.9em' x='.15em' font-size='70' fill='white' font-weight='bold'>YL</text></svg>">
 </head>
@@ -1582,6 +1628,6 @@
     }
     </script>
 
-    <script src="script.js?v=20260308-touch-safe" defer></script>
+    <script src="script.js?v=20260308-touch-v2" defer></script>
 </body>
 </html>
