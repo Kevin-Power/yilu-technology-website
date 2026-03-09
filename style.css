@@ -732,12 +732,22 @@ html.is-ios {
 }
 
 /* Keep navbar fixed on iOS; JS already disables hide-on-scroll */
+/* IMPORTANT: Do NOT set transform on navbar — it creates a containing block
+   that breaks .nav-menu's position:fixed on mobile, causing the navbar to
+   cover the entire viewport on iOS Safari. JS now uses `top` instead of
+   `transform` for hide/show animation, but this is a safety net. */
 html.is-ios .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    transform: translateY(0) !important;
+    transform: none !important;
+}
+
+/* Safety: ensure no transform on navbar for any touch device (prevents
+   containing-block issue that breaks .nav-menu position:fixed on mobile) */
+html.is-touch .navbar {
+    transform: none !important;
 }
 
 /* Hide decorative hero layers on iOS to prevent extra compositor layers */

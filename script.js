@@ -1319,17 +1319,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // === Navbar Hide/Show on Scroll ===
+    // NOTE: We use `top` instead of `transform` to slide the navbar.
+    // A CSS transform on a fixed-position element creates a new containing block,
+    // which breaks `position: fixed` on children (like .nav-menu on mobile).
+    // This was the root cause of the iOS viewport-covering bug.
     let lastScrollY = 0;
     let ticking = false;
+    const navbarHeight = navbar.offsetHeight || 80;
+
     if (!isIOSDevice) {
         window.addEventListener('scroll', () => {
             if (!ticking) {
                 window.requestAnimationFrame(() => {
                     const currentScrollY = window.scrollY;
                     if (currentScrollY > 600 && currentScrollY > lastScrollY + 5) {
-                        navbar.style.transform = 'translateY(-100%)';
+                        navbar.style.top = `-${navbarHeight}px`;
                     } else {
-                        navbar.style.transform = 'translateY(0)';
+                        navbar.style.top = '0';
                     }
                     lastScrollY = currentScrollY;
                     ticking = false;
@@ -1337,9 +1343,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ticking = true;
             }
         }, { passive: true });
-    } else {
-        navbar.style.transform = 'translateY(0)';
     }
+    // iOS: navbar stays fixed at top:0, no hide-on-scroll.
 
     // === Back-to-Top Progress Ring ===
     const progressRing = document.getElementById('progressRing');
