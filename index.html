@@ -40,115 +40,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-    <!-- STEP 1: Synchronous touch detection — runs BEFORE body parsing -->
+    <!-- Touch device: synchronous detection + DOM replacement approach -->
     <script>
     (function(){
         var t = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        if (t) document.documentElement.className += ' is-touch';
+        if (t) {
+            document.documentElement.className += ' is-touch';
+            // On DOM ready: physically REPLACE the hero element with a simple div.
+            // This eliminates ALL CSS class associations that cause iOS compositor bugs.
+            document.addEventListener('DOMContentLoaded', function() {
+                var hero = document.getElementById('home');
+                if (!hero) return;
+                // Extract the text content we need
+                var badge = hero.querySelector('.hero-badge span');
+                var lines = hero.querySelectorAll('.hero-title-line, .hero-title-gradient');
+                var desc = hero.querySelector('.hero-desc');
+                var stats = hero.querySelector('.hero-stats');
+                // Build simple replacement
+                var d = document.createElement('div');
+                d.id = 'home';
+                d.setAttribute('style',
+                    'background:linear-gradient(180deg,#020617 0%,#0f172a 50%,#1e293b 100%);' +
+                    'padding:100px 20px 48px;text-align:center;color:#fff;'
+                );
+                var h = '<div style="display:inline-flex;align-items:center;gap:10px;padding:8px 20px;' +
+                    'background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.2);' +
+                    'border-radius:50px;margin-bottom:32px;color:#94a3b8;font-size:14px;">' +
+                    '<i class="fas fa-shield-halved" style="color:#0ea5e9;font-size:14px;"></i> ' +
+                    (badge ? badge.textContent : 'Dell Technologies 授權合作夥伴') + '</div>';
+                h += '<h1 style="font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.2;margin-bottom:24px;">';
+                lines.forEach(function(l) {
+                    var isGrad = l.classList.contains('hero-title-gradient');
+                    if (isGrad) {
+                        h += '<span data-i18n="hero-line2" style="display:block;background:linear-gradient(135deg,#0ea5e9,#6366f1);' +
+                             '-webkit-background-clip:text;-webkit-text-fill-color:transparent;">' + l.textContent + '</span>';
+                    } else {
+                        h += '<span data-i18n="' + (l.getAttribute('data-i18n')||'') + '" style="display:block;">' + l.textContent + '</span>';
+                    }
+                });
+                h += '</h1>';
+                if (desc) {
+                    h += '<p style="font-size:16px;line-height:1.8;color:#94a3b8;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto;">' +
+                         desc.innerHTML + '</p>';
+                }
+                h += '<div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:48px;">' +
+                     '<a href="#contact" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;' +
+                     'background:linear-gradient(135deg,#0ea5e9,#6366f1);color:#fff;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;">' +
+                     '<span data-i18n="hero-btn1">立即諮詢方案</span> <i class="fas fa-arrow-right"></i></a>' +
+                     '<a href="#services" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;' +
+                     'border:1px solid rgba(255,255,255,0.2);color:#fff;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;">' +
+                     '<span data-i18n="hero-btn2">瞭解我們的服務</span> <i class="fas fa-chevron-down"></i></a></div>';
+                if (stats) { h += '<div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">' + stats.innerHTML + '</div>'; }
+                d.innerHTML = h;
+                hero.parentNode.replaceChild(d, hero);
+                // Also remove preloader
+                var pre = document.getElementById('preloader');
+                if (pre) pre.remove();
+                document.body.classList.add('page-loaded');
+            });
+        }
     })();
     </script>
-    <!-- STEP 2: Touch-safe hero — uses class from step 1, NOT media query -->
-    <style id="touch-hero-fix">
-    /* Primary: class-based (set synchronously above) */
-    html.is-touch .hero {
-        position: relative !important;
-        display: block !important;
-        min-height: auto !important;
-        height: auto !important;
-        overflow: visible !important;
-        isolation: auto !important;
-        contain: none !important;
-        -webkit-transform: none !important;
-        transform: none !important;
-        will-change: auto !important;
-        z-index: 0 !important;
-        background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e293b 100%) !important;
-        padding: 100px 0 48px !important;
-    }
-    html.is-touch .hero-bg,
-    html.is-touch .hero-particles,
-    html.is-touch .hero-gradient,
-    html.is-touch .hero-grid-pattern,
-    html.is-touch .hero-orb,
-    html.is-touch .hero-scroll {
-        display: none !important;
-    }
-    html.is-touch .hero-inner {
-        display: block !important;
-        position: static !important;
-        z-index: auto !important;
-    }
-    html.is-touch .hero-visual {
-        display: none !important;
-    }
-    html.is-touch .hero-content {
-        position: static !important;
-        z-index: auto !important;
-        max-width: 700px !important;
-        margin: 0 auto !important;
-        padding: 0 20px !important;
-        text-align: center !important;
-    }
-    html.is-touch .hero *,
-    html.is-touch .hero [data-aos],
-    html.is-touch .hero-content > * {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-        animation: none !important;
-        visibility: visible !important;
-    }
-    html.is-touch .hero-actions { justify-content: center !important; }
-    html.is-touch .hero-stats { justify-content: center !important; flex-wrap: wrap !important; }
-    /* Guarantee sections BELOW hero have opaque backgrounds */
+    <style>
+    /* Touch: fix body overflow that breaks iOS Safari scroll */
+    html.is-touch body { overflow-x: visible !important; }
+    html.is-touch #preloader { display: none !important; }
+    html.is-touch [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }
     html.is-touch .trust-strip { background: #0f172a !important; }
-    html.is-touch .section { background: var(--gray-50, #f8fafc) !important; }
+    html.is-touch .section { background: #f8fafc !important; }
     html.is-touch .section.security,
     html.is-touch .section.why-us,
     html.is-touch .section.testimonials,
     html.is-touch .cta-section { background: #0f172a !important; }
     html.is-touch .footer { background: #020617 !important; }
-    /* Force ALL page [data-aos] visible — no entrance animations on touch */
-    html.is-touch [data-aos] {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-    }
-    /* Kill page-loaded hero animations completely */
-    html.is-touch .hero-content > *,
-    html.is-touch .hero-visual {
-        animation: none !important;
-    }
-    /* Remove preloader immediately on touch (loaded via JS below anyway) */
-    html.is-touch #preloader { display: none !important; }
+    html.is-touch .navbar.scrolled { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(15,23,42,0.98) !important; }
     </style>
-    <link rel="stylesheet" href="style.css?v=20260308-touch-v2">
-    <!-- STEP 3: Re-assert touch overrides AFTER external CSS to guarantee cascade victory -->
-    <style id="touch-hero-final">
-    html.is-touch .hero {
-        position: relative !important;
-        display: block !important;
-        min-height: auto !important;
-        height: auto !important;
-        overflow: visible !important;
-        isolation: auto !important;
-        contain: none !important;
-        z-index: 0 !important;
-        background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e293b 100%) !important;
-        padding: 100px 0 48px !important;
-    }
-    html.is-touch .hero-bg,
-    html.is-touch .hero-particles,
-    html.is-touch .hero-gradient,
-    html.is-touch .hero-grid-pattern,
-    html.is-touch .hero-orb,
-    html.is-touch .hero-scroll,
-    html.is-touch .hero-visual,
-    html.is-touch #preloader { display: none !important; }
-    html.is-touch .hero-inner { display: block !important; position: static !important; }
-    html.is-touch .hero-content { position: static !important; max-width: 700px !important; margin: 0 auto !important; padding: 0 20px !important; text-align: center !important; }
-    html.is-touch .hero *, html.is-touch [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
-    </style>
+    <link rel="stylesheet" href="style.css?v=20260309-replace">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230ea5e9'/><text y='.9em' x='.15em' font-size='70' fill='white' font-weight='bold'>YL</text></svg>">
 </head>
 <body>
@@ -1628,6 +1595,6 @@
     }
     </script>
 
-    <script src="script.js?v=20260308-touch-v2" defer></script>
+    <script src="script.js?v=20260309-replace" defer></script>
 </body>
 </html>
