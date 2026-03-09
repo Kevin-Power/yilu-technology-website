@@ -46,8 +46,47 @@
         var t = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (t) {
             document.documentElement.className += ' is-touch';
-            // On DOM ready: physically REPLACE the hero element with a simple div.
-            // This eliminates ALL CSS class associations that cause iOS compositor bugs.
+
+            // === DIAGNOSTIC TOOL ===
+            // Shows which element is at the center of the viewport
+            document.addEventListener('DOMContentLoaded', function() {
+                var diag = document.createElement('div');
+                diag.id = 'diag-panel';
+                diag.setAttribute('style',
+                    'position:fixed;bottom:0;left:0;right:0;z-index:999999;' +
+                    'background:red;color:white;font-size:11px;padding:8px 12px;' +
+                    'font-family:monospace;pointer-events:none;line-height:1.4;'
+                );
+                document.body.appendChild(diag);
+
+                function updateDiag() {
+                    var cx = window.innerWidth / 2;
+                    var cy = window.innerHeight / 2;
+                    // Temporarily hide diag to not detect itself
+                    diag.style.display = 'none';
+                    var el = document.elementFromPoint(cx, cy);
+                    diag.style.display = '';
+                    if (el) {
+                        var tag = el.tagName.toLowerCase();
+                        var cls = el.className ? (typeof el.className === 'string' ? el.className : '') : '';
+                        var id = el.id ? '#' + el.id : '';
+                        var zidx = window.getComputedStyle(el).zIndex;
+                        var pos = window.getComputedStyle(el).position;
+                        var parent = el.parentElement;
+                        var parentInfo = parent ? (parent.tagName.toLowerCase() + (parent.className ? '.' + (typeof parent.className === 'string' ? parent.className.split(' ')[0] : '') : '')) : 'none';
+                        diag.textContent = 'CENTER: <' + tag + id + '> cls="' + cls.substring(0,40) + '" pos=' + pos + ' z=' + zidx + ' parent=' + parentInfo + ' scrollY=' + Math.round(window.scrollY);
+                    } else {
+                        diag.textContent = 'CENTER: null element | scrollY=' + Math.round(window.scrollY);
+                    }
+                }
+
+                // Update on scroll, touch, and periodically
+                window.addEventListener('scroll', updateDiag, {passive:true});
+                setInterval(updateDiag, 500);
+                updateDiag();
+            });
+            // === END DIAGNOSTIC ===
+
             document.addEventListener('DOMContentLoaded', function() {
                 var hero = document.getElementById('home');
                 if (!hero) return;
@@ -131,7 +170,7 @@
     html.is-touch .cta-section { background: #0f172a !important; }
     html.is-touch .footer { background: #020617 !important; }
     </style>
-    <link rel="stylesheet" href="style.css?v=20260309-no-blur">
+    <link rel="stylesheet" href="style.css?v=20260309-diag">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230ea5e9'/><text y='.9em' x='.15em' font-size='70' fill='white' font-weight='bold'>YL</text></svg>">
 </head>
 <body>
@@ -1611,6 +1650,6 @@
     }
     </script>
 
-    <script src="script.js?v=20260309-no-blur" defer></script>
+    <script src="script.js?v=20260309-diag" defer></script>
 </body>
 </html>
