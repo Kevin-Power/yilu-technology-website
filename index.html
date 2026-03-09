@@ -102,10 +102,27 @@
     })();
     </script>
     <style>
-    /* Touch: fix body overflow that breaks iOS Safari scroll */
-    html.is-touch body { overflow-x: visible !important; }
+    /* === iOS Safari backdrop-filter compositor fix ===
+       backdrop-filter on position:fixed elements (even hidden/off-screen ones)
+       creates GPU compositor layers that cause rendering artifacts on iOS Safari.
+       Kill ALL backdrop-filter on touch devices. */
+    html.is-touch * {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+    /* Hide full-screen overlays that could cover content */
     html.is-touch #preloader { display: none !important; }
+    html.is-touch .search-overlay { display: none !important; }
+    html.is-touch .nav-overlay { display: none !important; }
+    html.is-touch .cursor-glow { display: none !important; }
+    /* Navbar: solid background instead of blur */
+    html.is-touch .navbar { background: rgba(15,23,42,0.98) !important; }
+    html.is-touch .navbar.scrolled { background: rgba(15,23,42,0.98) !important; }
+    /* Mobile nav menu: solid background, no blur */
+    html.is-touch .nav-menu { background: rgba(15,23,42,0.99) !important; }
+    /* AOS: force all visible */
     html.is-touch [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    /* Section backgrounds */
     html.is-touch .trust-strip { background: #0f172a !important; }
     html.is-touch .section { background: #f8fafc !important; }
     html.is-touch .section.security,
@@ -113,9 +130,8 @@
     html.is-touch .section.testimonials,
     html.is-touch .cta-section { background: #0f172a !important; }
     html.is-touch .footer { background: #020617 !important; }
-    html.is-touch .navbar.scrolled { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(15,23,42,0.98) !important; }
     </style>
-    <link rel="stylesheet" href="style.css?v=20260309-replace">
+    <link rel="stylesheet" href="style.css?v=20260309-no-blur">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230ea5e9'/><text y='.9em' x='.15em' font-size='70' fill='white' font-weight='bold'>YL</text></svg>">
 </head>
 <body>
@@ -1595,6 +1611,6 @@
     }
     </script>
 
-    <script src="script.js?v=20260309-replace" defer></script>
+    <script src="script.js?v=20260309-no-blur" defer></script>
 </body>
 </html>
