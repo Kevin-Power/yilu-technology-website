@@ -46,6 +46,44 @@
         var t = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (t) {
             document.documentElement.className += ' is-touch';
+
+            // === DIAGNOSTIC v2 ===
+            document.addEventListener('DOMContentLoaded', function() {
+                var diag = document.createElement('div');
+                diag.id = 'diag-panel';
+                diag.setAttribute('style',
+                    'position:fixed;bottom:0;left:0;right:0;z-index:999999;' +
+                    'background:red;color:white;font-size:10px;padding:6px 10px;' +
+                    'font-family:monospace;pointer-events:none;line-height:1.3;'
+                );
+                document.body.appendChild(diag);
+                function updateDiag() {
+                    var nb = document.getElementById('navbar');
+                    var nm = document.getElementById('navMenu');
+                    var cx = window.innerWidth / 2;
+                    var cy = window.innerHeight / 2;
+                    diag.style.display = 'none';
+                    var el = document.elementFromPoint(cx, cy);
+                    diag.style.display = '';
+                    var nbS = nb ? window.getComputedStyle(nb) : null;
+                    var nmS = nm ? window.getComputedStyle(nm) : null;
+                    var nbH = nb ? nb.getBoundingClientRect().height : '?';
+                    var nbT = nbS ? nbS.transform : '?';
+                    var nbBF = nbS ? (nbS.backdropFilter || nbS.webkitBackdropFilter || 'none') : '?';
+                    var nmD = nmS ? nmS.display : '?';
+                    var nmP = nmS ? nmS.position : '?';
+                    var nmR = nmS ? nmS.right : '?';
+                    var nmV = nmS ? nmS.visibility : '?';
+                    var elInfo = el ? ('<' + el.tagName.toLowerCase() + (el.id?'#'+el.id:'') + '> cls=' + (el.className||'').toString().substring(0,30)) : 'null';
+                    diag.innerHTML =
+                        'NAV h=' + Math.round(nbH) + ' tf=' + nbT + ' bf=' + nbBF + '<br>' +
+                        'MENU d=' + nmD + ' pos=' + nmP + ' r=' + nmR + ' vis=' + nmV + '<br>' +
+                        'CENTER: ' + elInfo + ' scrollY=' + Math.round(window.scrollY);
+                }
+                window.addEventListener('scroll', updateDiag, {passive:true});
+                setInterval(updateDiag, 1000);
+                updateDiag();
+            });
         }
     })();
     </script>
@@ -61,15 +99,29 @@
     /* Hide elements not needed on touch */
     html.is-touch #preloader { display: none !important; }
     html.is-touch .cursor-glow { display: none !important; }
-    /* Navbar: solid background instead of blur */
-    html.is-touch .navbar { background: rgba(15,23,42,0.98) !important; }
+    /* Navbar: solid background instead of blur, constrain height */
+    html.is-touch .navbar {
+        background: rgba(15,23,42,0.98) !important;
+        transform: none !important;
+        will-change: auto !important;
+        contain: none !important;
+        filter: none !important;
+    }
     html.is-touch .navbar.scrolled { background: rgba(15,23,42,0.98) !important; }
+    /* NUCLEAR FIX: On touch mobile, completely hide .nav-menu when not active.
+       This removes it from the rendering tree entirely, preventing any
+       possibility of it expanding the navbar's layout or hit-test area. */
+    @media (max-width: 768px) {
+        html.is-touch .nav-menu:not(.active) {
+            display: none !important;
+        }
+    }
     /* Mobile nav menu: solid background (replaces killed backdrop-filter blur) */
-    html.is-touch .nav-menu { background: rgba(15,23,42,0.99) !important; }
+    html.is-touch .nav-menu.active { background: rgba(15,23,42,0.99) !important; }
     /* AOS: force all visible (prevents timing misfires on iOS) */
     html.is-touch [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }
     </style>
-    <link rel="stylesheet" href="style.css?v=20260309-fix1">
+    <link rel="stylesheet" href="style.css?v=20260309-fix2">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230ea5e9'/><text y='.9em' x='.15em' font-size='70' fill='white' font-weight='bold'>YL</text></svg>">
 </head>
 <body>
@@ -1549,6 +1601,6 @@
     }
     </script>
 
-    <script src="script.js?v=20260309-fix1" defer></script>
+    <script src="script.js?v=20260309-fix2" defer></script>
 </body>
 </html>
