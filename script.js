@@ -236,6 +236,16 @@ const TRANSLATIONS = {
         'form-phone-label': '聯絡電話',
         'form-phone-ph': '請輸入聯絡電話',
         'form-service-label': '需求類型',
+        'form-opt-default': '請選擇需求類型',
+        'form-opt-server': 'Dell 伺服器與儲存',
+        'form-opt-pc': 'Dell 商用電腦與工作站',
+        'form-opt-cs': 'CrowdStrike 端點防護',
+        'form-opt-kb4': 'KnowBe4 資安意識培訓',
+        'form-opt-ssc': 'SecurityScorecard 供應鏈風險',
+        'form-opt-infra': 'IT 基礎架構規劃',
+        'form-opt-consult': '資安合規諮詢',
+        'form-opt-support': '技術支援服務',
+        'form-opt-other': '其他需求',
         'form-msg-label': '需求說明 *',
         'form-msg-ph': '請描述您的需求，例如：公司規模、目前 IT 環境、預期目標等，我們將盡快回覆',
         'form-submit': '送出諮詢',
@@ -490,6 +500,16 @@ const TRANSLATIONS = {
         'form-phone-label': 'Phone',
         'form-phone-ph': 'Enter your phone number',
         'form-service-label': 'Inquiry Type',
+        'form-opt-default': 'Select inquiry type',
+        'form-opt-server': 'Dell Servers & Storage',
+        'form-opt-pc': 'Dell Commercial PCs & Workstations',
+        'form-opt-cs': 'CrowdStrike Endpoint Protection',
+        'form-opt-kb4': 'KnowBe4 Security Awareness Training',
+        'form-opt-ssc': 'SecurityScorecard Supply Chain Risk',
+        'form-opt-infra': 'IT Infrastructure Planning',
+        'form-opt-consult': 'Security Compliance Consulting',
+        'form-opt-support': 'Technical Support Services',
+        'form-opt-other': 'Other',
         'form-msg-label': 'Message *',
         'form-msg-ph': 'Please describe your needs — e.g., company size, current IT environment, expected goals. We will respond shortly.',
         'form-submit': 'Send Inquiry',
@@ -1270,11 +1290,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (question) {
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                // Close all
-                faqItems.forEach(i => i.classList.remove('active'));
+                // Close all & reset aria
+                faqItems.forEach(i => {
+                    i.classList.remove('active');
+                    const btn = i.querySelector('.faq-question');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                });
                 // Toggle current
                 if (!isActive) {
                     item.classList.add('active');
+                    question.setAttribute('aria-expanded', 'true');
                 }
             });
         }

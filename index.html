@@ -8,14 +8,18 @@
     <meta name="author" content="YILU Technology Co., LTD">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0f172a">
-    <link rel="canonical" href="https://yilutech.com/">
+    <!-- Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="canonical" href="https://www.yilutek.com/">
     <meta property="og:title" content="宜路科技 | 專業系統整合 &amp; 資安服務">
     <meta property="og:description" content="專業 IT 系統整合商，提供 Dell Technologies 產品整合與 CrowdStrike、KnowBe4、SecurityScorecard 資安服務">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yilutech.com/">
+    <meta property="og:url" content="https://www.yilutek.com/">
     <meta property="og:locale" content="zh_TW">
     <meta property="og:site_name" content="宜路科技 YILU Technology">
-    <meta property="og:image" content="https://yilutech.com/og-image.svg">
+    <meta property="og:image" content="https://www.yilutek.com/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="宜路科技 YILU Technology — 專業系統整合 & 企業資安服務">
@@ -23,11 +27,11 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="宜路科技 | 專業系統整合 & 資安服務">
     <meta name="twitter:description" content="專業 IT 系統整合商，提供 Dell Technologies 產品規劃建置與 CrowdStrike、KnowBe4、SecurityScorecard 資安服務，為台灣企業提供一站式 IT 解決方案。">
-    <meta name="twitter:image" content="https://yilutech.com/og-image.svg">
+    <meta name="twitter:image" content="https://www.yilutek.com/og-image.png">
     <!-- hreflang alternates -->
-    <link rel="alternate" hreflang="zh-TW" href="https://yilutech.com/">
-    <link rel="alternate" hreflang="en" href="https://yilutech.com/">
-    <link rel="alternate" hreflang="x-default" href="https://yilutech.com/">
+    <link rel="alternate" hreflang="zh-TW" href="https://www.yilutek.com/">
+    <link rel="alternate" hreflang="en" href="https://www.yilutek.com/">
+    <link rel="alternate" hreflang="x-default" href="https://www.yilutek.com/">
     <title>宜路科技 YILU Technology | 專業系統整合 &amp; 企業資安服務</title>
     <!-- Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,8 +39,8 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap">
     <!-- Fonts & Icons -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -148,7 +152,7 @@
                 <li><a href="#security" class="nav-link" data-i18n="nav-security">資安服務</a></li>
                 <li><a href="#why-us" class="nav-link" data-i18n="nav-why">為何選擇我們</a></li>
                 <li><a href="#contact" class="nav-link" data-i18n="nav-contact">聯絡我們</a></li>
-                <div class="nav-pill" id="navPill"></div>
+                <li class="nav-pill-wrapper" aria-hidden="true"><div class="nav-pill" id="navPill"></div></li>
             </ul>
             <button class="lang-toggle" id="langToggle" data-lang="zh" aria-label="Switch to English">
                 <span class="lang-zh">中</span>
@@ -1028,7 +1032,7 @@
             </div>
             <div class="faq-list" data-aos="fade-up">
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span data-i18n="faq1-q">宜路科技提供哪些品牌的產品？</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -1037,7 +1041,7 @@
                     </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span data-i18n="faq2-q">我的企業規模不大，也適合使用這些資安解決方案嗎？</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -1046,7 +1050,7 @@
                     </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span data-i18n="faq3-q">從諮詢到完成部署大約需要多長時間？</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -1055,7 +1059,7 @@
                     </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span data-i18n="faq4-q">你們提供哪些售後服務與技術支援？</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -1064,7 +1068,7 @@
                     </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span data-i18n="faq5-q">CrowdStrike 與傳統防毒軟體有什麼不同？</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -1073,7 +1077,7 @@
                     </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span data-i18n="faq6-q">如何開始與宜路科技合作？</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -1289,16 +1293,16 @@
                         <div class="form-group">
                             <label for="service" data-i18n="form-service-label">需求類型</label>
                             <select id="service" name="service">
-                                <option value="">請選擇需求類型</option>
-                                <option value="dell-server">Dell 伺服器與儲存</option>
-                                <option value="dell-pc">Dell 商用電腦與工作站</option>
-                                <option value="crowdstrike">CrowdStrike 端點防護</option>
-                                <option value="knowbe4">KnowBe4 資安意識培訓</option>
-                                <option value="ssc">SecurityScorecard 供應鏈風險</option>
-                                <option value="infrastructure">IT 基礎架構規劃</option>
-                                <option value="consulting">資安合規諮詢</option>
-                                <option value="support">技術支援服務</option>
-                                <option value="other">其他需求</option>
+                                <option value="" data-i18n="form-opt-default">請選擇需求類型</option>
+                                <option value="dell-server" data-i18n="form-opt-server">Dell 伺服器與儲存</option>
+                                <option value="dell-pc" data-i18n="form-opt-pc">Dell 商用電腦與工作站</option>
+                                <option value="crowdstrike" data-i18n="form-opt-cs">CrowdStrike 端點防護</option>
+                                <option value="knowbe4" data-i18n="form-opt-kb4">KnowBe4 資安意識培訓</option>
+                                <option value="ssc" data-i18n="form-opt-ssc">SecurityScorecard 供應鏈風險</option>
+                                <option value="infrastructure" data-i18n="form-opt-infra">IT 基礎架構規劃</option>
+                                <option value="consulting" data-i18n="form-opt-consult">資安合規諮詢</option>
+                                <option value="support" data-i18n="form-opt-support">技術支援服務</option>
+                                <option value="other" data-i18n="form-opt-other">其他需求</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1461,9 +1465,9 @@
         "@type": ["Organization", "LocalBusiness"],
         "name": "宜路科技有限公司",
         "alternateName": "YILU Technology Co., LTD",
-        "url": "https://yilutech.com",
-        "logo": "https://yilutech.com/og-image.svg",
-        "image": "https://yilutech.com/og-image.svg",
+        "url": "https://www.yilutek.com",
+        "logo": "https://www.yilutek.com/og-image.png",
+        "image": "https://www.yilutek.com/og-image.png",
         "description": "專業系統整合商，提供 Dell Technologies 產品整合與 CrowdStrike、KnowBe4、SecurityScorecard 資安解決方案",
         "address": {
             "@type": "PostalAddress",

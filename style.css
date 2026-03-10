@@ -892,42 +892,6 @@ html.is-ios body.page-loaded .hero-scroll {
     height: 450px;
 }
 
-.about-card-stack {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.about-card {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 24px 32px;
-    background: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-xl);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--dark-800);
-    transition: var(--transition);
-}
-
-.about-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glow);
-}
-
-.about-card i {
-    font-size: 24px;
-    color: var(--primary);
-}
-
-.about-card.card-1 { top: 20px; left: 20px; }
-.about-card.card-2 { top: 110px; right: 10px; }
-.about-card.card-3 { top: 220px; left: 40px; }
-.about-card.card-4 { top: 320px; right: 30px; }
-
 /* === Services Section === */
 .services-grid {
     display: grid;
@@ -1026,11 +990,7 @@ html.is-ios body.page-loaded .hero-scroll {
     background: var(--gray-50);
 }
 
-.dell-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
+
 
 .dell-card {
     background: var(--white);
@@ -1048,47 +1008,7 @@ html.is-ios body.page-loaded .hero-scroll {
     border-color: var(--primary);
 }
 
-.dell-card-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    background: var(--dark-900);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-light);
-    font-size: 22px;
-    flex-shrink: 0;
-}
 
-.dell-card-content h3 {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--dark-900);
-    margin-bottom: 8px;
-}
-
-.dell-card-content p {
-    font-size: 14px;
-    color: var(--dark-500);
-    line-height: 1.6;
-    margin-bottom: 12px;
-}
-
-.dell-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.dell-tags span {
-    font-size: 11px;
-    padding: 4px 10px;
-    background: var(--gray-100);
-    color: var(--dark-600);
-    border-radius: 20px;
-    font-weight: 500;
-}
 
 /* === Security Section === */
 .security {
@@ -1300,53 +1220,6 @@ html.is-ios body.page-loaded .hero-scroll {
 /* === Partners Section === */
 .partners {
     background: var(--gray-50);
-}
-
-.partners-showcase {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-}
-
-.partner-item {
-    text-align: center;
-    padding: 40px 24px;
-    background: var(--white);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--gray-200);
-    transition: var(--transition);
-}
-
-.partner-item:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary);
-}
-
-.partner-logo-wrap {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 20px;
-    border-radius: 16px;
-    background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: var(--white);
-}
-
-.partner-name {
-    display: block;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--dark-900);
-    margin-bottom: 4px;
-}
-
-.partner-type {
-    font-size: 13px;
-    color: var(--dark-500);
 }
 
 /* === CTA Section === */
@@ -4509,11 +4382,6 @@ body.page-loaded .hero-visual {
     border-color: var(--primary);
     box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);
     background: rgba(14, 165, 233, 0.02);
-}
-
-/* Floating contact — Line option support */
-.floating-option.line {
-    background: #06c755;
 }
 
 /* Trust strip — slightly improved */
