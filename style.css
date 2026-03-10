@@ -1415,6 +1415,14 @@ html.is-ios body.page-loaded .hero-scroll {
     color: var(--white);
 }
 
+.footer-tagline {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+}
+
 .footer-brand p {
     font-size: 14px;
     color: var(--gray-400);

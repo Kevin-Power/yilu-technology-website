@@ -21,8 +21,10 @@ const TRANSLATIONS = {
         'nav-why': '為何選擇我們',
         'nav-contact': '聯絡我們',
         'nav-cta': '免費諮詢',
+        // Logo
+        'logo-sub': '數位轉型 宜路陪您',
         // Hero
-        'hero-badge': '專業 IT 系統整合商',
+        'hero-badge': '數位轉型 宜路陪您',
         'hero-line1': '為企業打造',
         'hero-line2': '堅不可摧的',
         'hero-line3': 'IT 基礎架構與資安防線',
@@ -251,6 +253,7 @@ const TRANSLATIONS = {
         'form-submit': '送出諮詢',
         // Footer
         'footer-logo-name': '宜路科技',
+        'footer-tagline': '數位轉型 宜路陪您',
         'footer-desc': '專業可靠的系統整合商，整合 Dell Technologies 全方位產品與頂尖資安品牌，為企業打造堅不可摧的 IT 基礎架構與資安防線。',
         'footer-col1-h4': '服務項目',
         'footer-l1-1': 'IT 基礎架構建置',
@@ -285,8 +288,10 @@ const TRANSLATIONS = {
         'nav-why': 'Why Us',
         'nav-contact': 'Contact',
         'nav-cta': 'Free Consultation',
+        // Logo
+        'logo-sub': 'Digital Transformation, YILU by Your Side',
         // Hero
-        'hero-badge': 'Professional IT System Integrator',
+        'hero-badge': 'Digital Transformation, YILU by Your Side',
         'hero-line1': 'Building',
         'hero-line2': 'Unbreakable',
         'hero-line3': 'IT Infrastructure & Cybersecurity',
@@ -515,6 +520,7 @@ const TRANSLATIONS = {
         'form-submit': 'Send Inquiry',
         // Footer
         'footer-logo-name': 'YILU Technology',
+        'footer-tagline': 'Digital Transformation, YILU by Your Side',
         'footer-desc': 'A reliable system integrator combining Dell Technologies and elite cybersecurity brands to build unbreakable IT infrastructure and digital defenses for enterprises.',
         'footer-col1-h4': 'Services',
         'footer-l1-1': 'IT Infrastructure',
