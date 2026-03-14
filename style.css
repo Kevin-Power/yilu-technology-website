@@ -29,6 +29,7 @@
     --crowdstrike: #e8372c;
     --knowbe4: #f59e0b;
     --ssc: #10b981;
+    --vmware: #696566;
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary), var(--accent));
@@ -1095,6 +1096,10 @@ html.is-ios body.page-loaded .hero-scroll {
 
 .security-brand-icon.ssc {
     background: linear-gradient(135deg, var(--ssc), #34d399);
+}
+
+.security-brand-icon.vmware {
+    background: linear-gradient(135deg, var(--vmware), #8b8688);
 }
 
 .security-brand h3 {
